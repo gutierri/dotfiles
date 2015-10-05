@@ -1,0 +1,40 @@
+set encoding=utf-8
+set nocompatible
+set number
+set nobackup
+set nowritebackup
+set noswapfile
+set t_Co=256
+set background=dark
+set title
+set lazyredraw
+set showmatch
+set ruler
+set autoread
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set expandtab
+set softtabstop=4
+set autoindent
+set copyindent
+set smartindent
+set preserveindent
+set cursorline cursorcolumn
+set hlsearch
+set laststatus=2
+set nowrap
+set list
+
+set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
+
+syntax on
+filetype plugin indent on 
+
+colorscheme gotham
+
+let g:lightline = { 
+    \ 'colorscheme': 'gotham',
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '', 'right': '' }
+    \ }
