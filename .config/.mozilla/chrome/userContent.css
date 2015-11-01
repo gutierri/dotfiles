@@ -1,0 +1,35 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document url-prefix("about:reader") {
+    body {
+        margin-left: 40px !important;
+    }
+    
+    body.dark {
+        background: #000000 !important;
+    }
+
+    #reader-domain {
+        display: none !important;
+    }
+    
+    #reader-toolbar {
+        border-right: 1px solid #14171B !important;
+        background-color: #252C33 !important;
+    }
+
+    .toolbar .button {
+        border-color: -moz-use-text-color #1d2328 #1d2328 -moz-use-text-color !important;
+    }
+    .button {
+        background-color: #252C33 !important;
+    }
+
+    .button:hover {
+        background-color: #171B1F !important;
+    }
+
+    #container {
+        max-width: 42em !important;
+    }
+}
