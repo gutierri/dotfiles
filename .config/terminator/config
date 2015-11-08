@@ -1,0 +1,30 @@
+[global_config]
+  borderless = True
+  focus = mouse
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    active_encodings = ANSI_X3.4-1968, UTF-8, ISO-8859-1
+    allow_bold = False
+    background_color = "#0a0f14"
+    background_darkness = 0.94
+    background_image = None
+    copy_on_selection = True
+    cursor_color = "#7b7b7b"
+    font = Monaco Bold 10
+    foreground_color = "#98d1ce"
+    login_shell = True
+    palette = "#0a0f14:#c33027:#26a98b:#edb54b:#195465:#4e5165:#33859d:#98d1ce:#10151b:#d26939:#081f2d:#245361:#093748:#888ba5:#599caa:#d3ebe9"
+    scrollback_lines = 5000
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False
