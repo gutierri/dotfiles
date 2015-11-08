@@ -31,7 +31,7 @@ set wildmenu
 set foldenable
 set splitright
 
-set list listchars=trail:·,precedes:«,extends:»,eol:¬
+set list listchars=trail:·,precedes:«,extends:»,eol:¬,tab:▸\
 
 set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
 
