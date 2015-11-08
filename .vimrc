@@ -1,6 +1,7 @@
 set encoding=utf-8
 set nocompatible
 set number
+set relativenumber
 set nobackup
 set nowritebackup
 set noswapfile
@@ -9,6 +10,7 @@ set background=dark
 set title
 set lazyredraw
 set showmatch
+set showcmd
 set ruler
 set autoread
 set tabstop=4
@@ -24,7 +26,11 @@ set cursorline cursorcolumn
 set hlsearch
 set laststatus=2
 set nowrap
-set list
+set wildmenu
+set foldenable
+set splitright
+
+set list listchars=trail:·,precedes:«,extends:»,eol:¬
 
 set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
 
