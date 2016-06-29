@@ -1,0 +1,47 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+import re
+import subprocess
+
+try:
+    with open('/etc/os-release', 'r') as is_os:
+        system_verify = is_os.read()
+        re.search(r'arch linux', system_verify, re.M|re.I)
+
+except:
+    print "Ooo! I can not identify your system :("
+
+
+def read_packages():
+    with open('packages.txt', 'r') as p:
+        return p.readlines();
+
+    return []
+
+
+def check_installed(package):
+    try:
+        return subprocess.check_output(["which", package], stderr=subprocess.STDOUT)
+    except:
+        return False
+
+
+def packages():
+    list_packages = read_packages()
+
+    not_install = []
+
+    for package in list_packages:
+        p = package.rstrip('\r\n')
+
+        if check_installed(p):
+            print "[✓] %s" % p
+
+        else:
+            not_install.append(p)
+
+            print "[✗] %s" % p
+
+if __name__ == '__main__':
+    packages()

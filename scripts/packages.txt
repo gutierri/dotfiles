@@ -1,0 +1,13 @@
+stow
+mpd
+git
+neovim
+python2-neovim
+irssi
+terminator
+ncmpcpp
+xclip
+scrot
+awesome
+docker
+docker-compose
