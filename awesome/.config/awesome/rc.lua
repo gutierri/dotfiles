@@ -53,7 +53,7 @@ end
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/hey/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -136,8 +136,7 @@ w_mem = lain.widgets.mem({
     end
 })
 
--- Widget ALSA
--- ALSA volume
+-- Widget volume
 w_volicon = wibox.widget.imagebox(beautiful.widget_vol)
 w_vol = lain.widgets.alsa({
     settings = function()
@@ -157,8 +156,9 @@ w_vol = lain.widgets.alsa({
         end
     })
 
--- Widget Connection
--- Widget MPD
+-- Widget Calender
+lain.widgets.calendar:attach(w_clock, { font_size = 8 })
+
 -- Widget Battery
 w_baticon = wibox.widget.imagebox(beautiful.widget_battery)
 w_bat = lain.widgets.bat({
@@ -179,6 +179,13 @@ w_bat = lain.widgets.bat({
             end
         })
 
+-- Widget Space FS
+w_fsicon = wibox.widget.imagebox(beautiful.widget_fs)
+w_fs = lain.widgets.fs({
+    settings  = function()
+        widget:set_text(" " .. fs_now.used .. "%")
+    end
+})
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -264,6 +271,10 @@ for s = 1, screen.count() do
     right_layout:add(separator)
     right_layout:add(w_volicon)
     right_layout:add(w_vol)
+
+    right_layout:add(separator)
+    right_layout:add(w_fsicon)
+    right_layout:add(w_fs)
 
     right_layout:add(separator)
     right_layout:add(w_memicon)

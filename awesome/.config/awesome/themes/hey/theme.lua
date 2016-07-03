@@ -106,6 +106,8 @@ theme.widget_vol_low                = theme.icons_dir .. "vol_low.png"
 theme.widget_vol_no                 = theme.icons_dir .. "vol_no.png"
 theme.widget_vol_mute               = theme.icons_dir .. "vol_mute.png"
 
+theme.widget_fs                     = theme.icons_dir .. "hdd.png"
+
 -- Define the icon theme for application icons. If not set then the icons 
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
