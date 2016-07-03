@@ -1,0 +1,15 @@
+[user]
+	email = me@gutierri.me
+	name = Gutierri Barboza
+[alias]
+	amend = commit --amend
+	status = status -s
+	branchs = branch -a
+	tags = tag -l
+	last = log -l --stat
+[color]
+	ui = auto
+[core]
+	editor = vim
+[diff]
+	tool = vimdiff

@@ -1,0 +1,51 @@
+! Colorscheme
+*.foreground:   #98d1ce
+*.background:   #0a0f14
+*.cursorColor:  #98d1ce
+
+*.color0:       #0a0f14
+*.color8:       #10151b
+
+*.color1:       #c33027
+*.color9:       #d26939
+
+*.color2:       #26a98b
+*.color10:      #081f2d
+
+*.color3:       #edb54b
+*.color11:      #245361
+
+*.color4:       #195465
+*.color12:      #093748
+
+*.color5:       #4e5165
+*.color13:      #888ba5
+
+*.color6:       #33859d
+*.color14:      #599caa
+
+*.color7:       #98d1ce
+*.color15:      #d3ebe9
+
+! scrollbar
+*scrollBar: false
+
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+! Font
+URxvt.font: xft:Source Code Pro:bold:pixelsize=18
+URxvt.letterSpace: -1
+
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline Bold fg5
+URxvt.cursorBlink: true
+
