@@ -1,0 +1,98 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+import re
+import subprocess
+import os
+import sys
+
+HOME = os.environ['HOME']
+
+try:
+    with open('/etc/os-release', 'r') as is_os:
+        system_verify = is_os.read()
+        re.search(r'arch linux', system_verify, re.M|re.I)
+
+except:
+    print "Ooo! I can not identify your system :("
+
+
+def _read_packages():
+    return ['stow',
+        'mpd',
+        'git',
+        'nvim',
+        'irssi',
+        'urxvt',
+        'ncmpcpp',
+        'xclip',
+        'scrot',
+        'awesome',
+        'docker',
+        'docker-compose',
+        'zathura',
+        'vagrant',
+        'virtualbox',
+        'udiskie']
+
+
+def _check_installed(package):
+    try:
+        return subprocess.check_output(["which", package], stderr=subprocess.STDOUT)
+    except:
+        return False
+
+
+def _working_stow(un_or_li):
+    ignore = ['.gitignore', '.gitmodules', '.git', 'README.md', 'bootstrap']
+    folders = os.listdir(os.getcwd())
+
+    stow_arg = "-R"
+
+    if un_or_li == "unlink":
+        stow_arg = "-D"
+
+    for l in folders:
+        if not l in ignore:
+            stow_command = "stow -v %s -t %s %s" % (stow_arg, HOME, l)
+            stow_command = stow_command.split(" ")
+            subprocess.call(stow_command)
+
+    else:
+        print "\nOK! Dotfiles ready"
+
+
+def _packages():
+    list_packages = _read_packages()
+
+    not_install = []
+
+    for package in list_packages:
+        p = package.rstrip('\r\n')
+
+        if _check_installed(p):
+            print "[✓] %s" % p
+
+        else:
+            not_install.append(p)
+
+            print "[✗] %s" % p
+
+        if package == list_packages[-1]:
+            print # breakline with print :)
+
+    else:
+        if not_install:
+            print "\nInstall the missing packages!\n"
+
+
+def main():
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "unlink" or sys.argv[1] == "link":
+            _working_stow(sys.argv[1])
+
+    else:
+        _packages()
+
+if __name__ == '__main__':
+    main()
