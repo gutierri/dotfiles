@@ -1,0 +1,3 @@
+[submodule "vim/.config/vim/pack/plugins/start/goyo"]
+	path = vim/.config/vim/pack/plugins/start/goyo
+	url = git@github.com:junegunn/goyo.vim.git

@@ -1,0 +1,35 @@
+#!/usr/bin/env python2
+
+import os
+import sys
+import subprocess
+
+IGNORE = ['.git']
+HOME = os.environ['HOME']
+
+
+def run(arg_stow):
+    folders = os.listdir(os.getcwd())
+    param_stow = '-R'
+
+    if arg_stow == 'unlink':
+        param_stow = '-D'
+
+    for package in folders:
+        if (not package in IGNORE) and os.path.isdir(package):
+            command = 'stow -v {0} -t {1} {2}'.format(param_stow, HOME,
+                       package).split(' ')
+
+            subprocess.call(command)
+
+    else:
+        print '\nOK! Dotfiles ready'
+
+
+if __name__ == '__main__':
+    if (len(sys.argv) is 2) and (sys.argv[1] in ('link', 'unlink')):
+        run(sys.argv[1])
+
+    else:
+        exit()
+

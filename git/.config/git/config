@@ -1,0 +1,12 @@
+[user]
+	email = me@gutierri.me
+	name = Gutierri Barboza
+	signingkey = 559063220EDC0F4F
+[color]
+	ui = auto
+[core]
+	editor = vim
+[diff]
+	tool = vimdiff
+[commit]
+	gpgsign = true
