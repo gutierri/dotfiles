@@ -305,6 +305,12 @@ globalkeys = awful.util.table.join(
                   awful.util.spawn("xbacklight -20%")
               end),
 
+    -- Lock screen (lock to lightdm)
+    awful.key({}, "XF86ScreenSaver",
+              function ()
+                  awful.util.spawn_with_shell("light-locker-command -l")
+              end),
+
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
