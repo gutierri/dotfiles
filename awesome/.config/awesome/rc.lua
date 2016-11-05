@@ -105,15 +105,42 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
+-- {{{ Utils Wibox
+
+-- Registers Widgets (with support for anonymous functions)
+-- Usage:
+-- { { "refs_to_widget", "path_to_icon" } }
+
+widgets_register = {}
+
+-- Auto margin on widgets
+local wibox_margin = function(widget_here)
+    return wibox.layout.margin(widget_here, 10, 10, 0, 0)
+end
+
+-- Widget concat text with icon
+local wibox_txt_ico = function(refs_widget, icon_widget, refs_wibox)
+    local refs_widget = refs_widget
+    local icon_widget = icon_widget
+
+    if icon_widget then
+        refs_wibox:add(wibox.widget.imagebox(icon_widget))
+    end
+
+    refs_wibox:add(refs_widget)
+
+    return
+end
+-- }}}
+
 -- {{{ Wibox
--- Create a textclock widget
-mytextclock = awful.widget.textclock()
+
 
 -- Create a wibox for each screen and add it
-mywibox = {}
+mywibox     = {}
 mypromptbox = {}
 mylayoutbox = {}
-mytaglist = {}
+mytaglist   = {}
 mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 1, awful.tag.viewonly),
                     awful.button({ modkey }, 1, awful.client.movetotag),
@@ -187,8 +214,21 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mytextclock)
+    if s == 1 then 
+        right_layout:add(wibox.widget.systray())
+    end
+
+    -- Call widgets of table
+    if widgets_register and #widgets_register >= 1 then
+        for w = 1, #widgets_register do
+            if type(widgets_register[w]) == "function" then
+                right_layout:add(wibox_margin(widgets_register[w]()))
+            else
+                right_layout:add(wibox_margin(widgets_register[w]))
+            end
+        end
+    end
+
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
