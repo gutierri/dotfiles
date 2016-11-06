@@ -15,7 +15,14 @@ git_status() {
     fi
 }
 
-PS1='\u \[\e[1;91m\]at\[\e[0m\] \h \[\e[1;91m\]in\[\e[0m\] \W '
+if [ -z $STY ]
+then
+    PS1=''
+else
+    PS1='(screen) '
+fi
+
+PS1+='\u \[\e[1;91m\]at\[\e[0m\] \h \[\e[1;91m\]in\[\e[0m\] \W '
 PS1+='$(__git_ps1 "\[\e[1;91m\]on\[\e[0m\] git:%s($(git_status))")'
 PS1+='\n% '
 PS2='... '
