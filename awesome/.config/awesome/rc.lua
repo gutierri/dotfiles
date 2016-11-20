@@ -14,6 +14,9 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
+-- Extern lib
+local lain = require("lain")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -108,14 +111,21 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- {{{ Utils Wibox
 
 -- Registers Widgets (with support for anonymous functions)
--- Usage:
--- { { "refs_to_widget", "path_to_icon" } }
 
-widgets_register = {}
+widgets_register = {
+    lain.widgets.bat({
+        settings = function()
+            if bat_now.status ~= "N/A" then
+                widget:set_markup(" " .. bat_now.perc .. "% ")
+            end
+        end
+    }),
+    awful.widget.textclock()
+}
 
 -- Auto margin on widgets
 local wibox_margin = function(widget_here)
-    return wibox.layout.margin(widget_here, 10, 10, 0, 0)
+    return wibox.layout.margin(widget_here, 4, 4, 0, 0)
 end
 
 -- Widget concat text with icon
