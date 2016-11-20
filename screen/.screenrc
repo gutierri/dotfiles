@@ -1,0 +1,8 @@
+startup_message off
+termcapinfo xterm* ti@:te@
+vbell off
+altscreen on
+windowlist string "%4n %h%=%f"
+term screen-256color
+layout save default
+termcapinfo xterm* ti@:te@
