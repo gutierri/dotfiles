@@ -16,7 +16,7 @@ set showmatch                   " highlight [({<>})]
 set splitbelow                  " New split goes below
 set splitright                  " New split goes right
 
-set foldmethod=marker                  " Enable folder marker
+set foldmethod=manual           " Enable folder marker
 set autochdir                   " Current directory of file
 
 " Settings indentation style default
@@ -24,6 +24,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autoindent
+set copyindent
 set shiftround
 set expandtab
 
@@ -114,6 +115,7 @@ autocmd! User GoyoLeave call <SID>goyo_leave()
 augroup settingsfiletypes
     autocmd!
     autocmd BufRead,BufNewFile *.{txt,md} setlocal wrap textwidth=79 colorcolumn=79
+    autocmd BufRead,BufNewFile *.{py} setlocal textwidth=79 colorcolumn=79
     autocmd VimEnter *.{txt,md} Goyo
 augroup END
 
