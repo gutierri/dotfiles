@@ -50,7 +50,7 @@
 *.color21:      base06
 
 ! Fonts
-URxvt.font: xft:Inconsolata:Bold:size=12
+URxvt.font:xft:Inconsolata:Bold:pixelsize=20
 
 ! Scroll
 
