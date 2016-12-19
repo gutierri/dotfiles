@@ -46,9 +46,9 @@ set wildignore=.svn,.hg,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.
 
 set backup writebackup
 set undofile
-set undodir=~/.config/vim/undo//
-set backupdir=~/.config/vim/backup//
-set directory=~/.config/vim/swap//
+set undodir=~/.config/vim/undo/
+set backupdir=~/.config/vim/backup/
+set directory=~/.config/vim/swap/
 
 " }}}
 
