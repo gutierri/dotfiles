@@ -70,7 +70,7 @@ nmap <F9> O<Esc>
 
 " }}}
 
-" Folder settings {{{
+" Location default settings {{{
 
 let &runtimepath.=',~/.config/vim,~/.config/vim/after'
 let &packpath.=',~/.config/vim,~/.config/vim/after'
