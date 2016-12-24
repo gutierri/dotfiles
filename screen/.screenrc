@@ -6,3 +6,5 @@ windowlist string "%4n %h%=%f"
 term screen-256color
 layout save default
 termcapinfo xterm* ti@:te@
+
+escape ^Jj
