@@ -22,3 +22,5 @@ alias cp='cp -i -v'
 alias mv='mv -i -v'
 alias rm='rm -i -v'
 alias aur='yaourt'
+
+alias mopidy-package='pip2 install --user'
