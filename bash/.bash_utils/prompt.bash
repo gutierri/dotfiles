@@ -19,7 +19,8 @@ if [ -z $STY ]
 then
     PS1=''
 else
-    PS1='(screen) '
+    SESSION_SCREN=$(screen -ls | sed '2!d' | cut -d. -f2 | sed 's/\s//' | cut -d\( -f1)
+    PS1="(screen:$SESSION_SCREN) "
 fi
 
 PS1+='\u \[\e[1;91m\]at\[\e[0m\] \h \[\e[1;91m\]in\[\e[0m\] \W '
