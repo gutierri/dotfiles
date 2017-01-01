@@ -1,6 +1,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Start Screen
+[[ -z "$STY" ]] && screen -R
+
 export EDITOR="vim"
 export LANG=en_US.UTF-8
 export VISUAL="${EDITOR}"
