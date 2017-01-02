@@ -19,8 +19,9 @@ if [ -z $STY ]
 then
     PS1=''
 else
-    SESSION_SCREN=$(screen -ls | sed '2!d' | cut -d. -f2 | sed 's/\s//' | cut -d\( -f1)
-    PS1="(screen:$SESSION_SCREN) "
+    CURRENT_SESSION_SCREEN=$(screen -ls | sed 's/^\s//' | grep -i 'attached' | sed 's/\s/\./' | cut -d. -f2)
+    COUNT_SESSIONS_SCREEN=$(screen -ls | sed 's/^\s//' | grep -P '(^[0-9]+[^\s])' | wc -l)
+    PS1="(screen:$CURRENT_SESSION_SCREEN:$COUNT_SESSIONS_SCREEN) "
 fi
 
 PS1+='\u \[\e[1;91m\]at\[\e[0m\] \h \[\e[1;91m\]in\[\e[0m\] \W '
