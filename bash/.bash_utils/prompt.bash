@@ -19,7 +19,8 @@ if [ -z $STY ]
 then
     PS1=''
 else
-    CURRENT_SESSION_SCREEN=$(screen -ls | sed 's/^\s//' | grep -i 'attached' | sed 's/\s/\./' | cut -d. -f2)
+    #refs http://serverfault.com/questions/377472/gnu-screen-how-to-get-current-sessionname-programmatically
+    CURRENT_SESSION_SCREEN=$(screen -ls | grep $(ps -o ppid -p $$ --no-headers | tr -d -t [:space:]) | tr -d -t [:space:] | cut -d. -f2)
     COUNT_SESSIONS_SCREEN=$(screen -ls | sed 's/^\s//' | grep -P '(^[0-9]+[^\s])' | wc -l)
     PS1="(screen:$CURRENT_SESSION_SCREEN:$COUNT_SESSIONS_SCREEN) "
 fi
