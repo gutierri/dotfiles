@@ -11,6 +11,9 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
+-- External lib
+local lain = require("lain")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -41,7 +44,7 @@ end
 beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -67,9 +70,9 @@ awful.layout.layouts = {
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
     awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
+    awful.layout.suit.corner.ne,
+    awful.layout.suit.corner.sw,
+    awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -116,6 +119,14 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
+
+bat_widget = lain.widgets.bat({
+    settings = function()
+        if bat_now.status ~= "N/A" then
+            widget:set_markup(" " .. bat_now.perc .. "% ")
+        end
+    end
+})
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
@@ -180,7 +191,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "α", "β", "λ", "Ω" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -215,6 +226,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
+            bat_widget,
             mytextclock,
             s.mylayoutbox,
         },
@@ -326,9 +338,57 @@ globalkeys = awful.util.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
+
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    -- Wibox
+    awful.key({ modkey }, "b",
+              function ()
+                 awful.screen.focused().mywibox.visible = not awful.screen.focused().mywibox.visible
+              end,
+              {description = "Hide/Show Wibox in all tags", group = "awesome"}),
+
+    -- Screenshot
+    awful.key({}, "Print",
+              function ()
+                  os.execute("scrot $HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H--%M--%S).png") 
+              end,
+              {description = "", group = "system"}),
+
+    -- ALSA volume control
+    awful.key({}, "XF86AudioRaiseVolume",
+              function ()
+                  awful.util.spawn("amixer -q set Master 6%+")
+              end),
+
+    awful.key({}, "XF86AudioLowerVolume",
+              function ()
+                  awful.util.spawn("amixer -q set Master 6%-")
+              end),
+
+    awful.key({}, "XF86AudioMute",
+              function ()
+                  awful.util.spawn("amixer -q set Master playback toggle")
+              end),
+
+    -- Adjust brightness
+    awful.key({}, "XF86MonBrightnessUp",
+              function ()
+                  awful.util.spawn("xbacklight +20%")
+              end),
+
+    awful.key({}, "XF86MonBrightnessDown",
+              function ()
+                  awful.util.spawn("xbacklight -20%")
+              end),
+
+    -- Lock screen (lock to lightdm)
+    awful.key({}, "XF86ScreenSaver",
+              function ()
+                  awful.util.spawn_with_shell("light-locker-command -l")
+              end)
 )
 
 clientkeys = awful.util.table.join(
@@ -466,7 +526,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
