@@ -11,8 +11,10 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
--- External lib
+-- External lib & packages
 local lain = require("lain")
+local pomodoro = require("pomodoro")
+pomodoro.init()
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -226,6 +228,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
+            pomodoro.widget,
             bat_widget,
             mytextclock,
             s.mylayoutbox,
@@ -382,6 +385,22 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86MonBrightnessDown",
               function ()
                   awful.util.spawn("xbacklight -20%")
+              end),
+
+    -- Control MPD
+    awful.key({}, "XF86AudioPrev",
+              function ()
+                  awful.util.spawn_with_shell("mpc prev")
+              end),
+
+    awful.key({}, "XF86AudioPlay",
+              function ()
+                  awful.util.spawn_with_shell("mpc toggle")
+              end),
+
+    awful.key({}, "XF86AudioNext",
+              function ()
+                  awful.util.spawn_with_shell("mpc next")
               end),
 
     -- Lock screen (lock to lightdm)
