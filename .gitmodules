@@ -4,3 +4,6 @@
 [submodule "awesome/.config/awesome/lain"]
 	path = awesome/.config/awesome/lain
 	url = git@github.com:copycat-killer/lain.git
+[submodule "awesome/.config/awesome/pomodoro"]
+	path = awesome/.config/awesome/pomodoro
+	url = git@github.com:nikolavp/awesome-pomodoro.git
