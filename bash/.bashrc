@@ -19,3 +19,6 @@ if [ -d "$HOME/.bash_utils" ]; then
         fi
     done
 fi
+
+[ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
+
