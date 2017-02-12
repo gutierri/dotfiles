@@ -126,18 +126,14 @@ local mem_widget = wibox.container.margin(lain.widgets.mem({
 }), 8, 8)
 
 -- Create a coating coins widget
-local _coins = wibox.container.margin(
-    wibox.widget.textbox("USD(↑) R$ 10,32      BTC(↑) $799,00      LTC(↑) $3,10      DASH(↑) $70,00"),
-8, 8)
-
-local _command_btc = 'bash -c "curl https://btc-e.com/api/3/ticker/btc_usd-btc_rur | grep -iPo high.+?, | head -n1 | sed s/[^0-9.]//g"'
+local _command_btc = 'bash -c "curl -s https://btc-e.com/api/3/ticker/btc_usd-btc_rur | grep -iPo high.+?, | head -n1 | sed s/[^0-9.]//g"'
 local _command_usd = 'bash -c "curl -s https://ptax.bcb.gov.br/ptax_internet/consultarUltimaCotacaoDolar.do | grep -i right | head -n1 | sed s/[^0-9,]//g"'
 
-local btc_coins = wibox.container.margin(awful.widget.watch(_command_btc, 1, function(widget, output)
+local btc_coins = wibox.container.margin(awful.widget.watch(_command_btc, 2000, function(widget, output)
                     widget:set_text("BTC " .. output)
                 end), 8, 8)
 
-local usd_coins = wibox.container.margin(awful.widget.watch(_command_usd, 30, function(widget, output)
+local usd_coins = wibox.container.margin(awful.widget.watch(_command_usd, 2000, function(widget, output)
                     widget:set_text("USD " .. output)
                 end), 8, 8)
 
