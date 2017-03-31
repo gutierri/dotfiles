@@ -116,6 +116,7 @@ augroup settingsfiletypes
     autocmd!
     autocmd BufRead,BufNewFile *.{txt,md} setlocal wrap textwidth=79 colorcolumn=79
     autocmd BufRead,BufNewFile *.{py} setlocal textwidth=79 colorcolumn=79
+    autocmd BufRead,BufNewFile *.{sh} setlocal noexpandtab
     autocmd VimEnter *.{txt,md} Goyo
 augroup END
 
