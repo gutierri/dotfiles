@@ -42,13 +42,16 @@ set wildignore=.svn,.hg,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.
 
 "}}}
 
-" Settings Backup {{{
+" Settings Backup and change folders {{{
 
 set backup writebackup
 set undofile
 set undodir=~/.config/vim/undo/
 set backupdir=~/.config/vim/backup/
 set directory=~/.config/vim/swap/
+let viminfopath="~/.config/vim/viminfo"
+
+let &viminfo .= ',n' . escape(viminfopath, ',')
 
 " }}}
 
@@ -84,32 +87,6 @@ hi Visual   ctermfg=black ctermbg=white
 
 " }}}
 
-" Plugins settings {{{
-
-" GOYO.VIM
-function! s:goyo_enter()
-    let b:quitting = 0
-    let b:quitting_bang = 0
-    autocmd QuitPre <buffer> let b:quitting = 1
-    cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
-endfunction
-
-function! s:goyo_leave()
-    " Quit Vim if this is the only remaining buffer
-    if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-        if b:quitting_bang
-            qa!
-        else
-            qa
-        endif
-    endif
-endfunction
-
-autocmd! User GoyoEnter call <SID>goyo_enter()
-autocmd! User GoyoLeave call <SID>goyo_leave()
-
-" }}}
-
 " Filetypes {{{
 
 augroup settingsfiletypes
@@ -117,7 +94,6 @@ augroup settingsfiletypes
     autocmd BufRead,BufNewFile *.{txt,md} setlocal wrap textwidth=79 colorcolumn=79
     autocmd BufRead,BufNewFile *.{py} setlocal textwidth=79 colorcolumn=79
     autocmd BufRead,BufNewFile *.{sh} setlocal noexpandtab
-    autocmd VimEnter *.{txt,md} Goyo
 augroup END
 
 " }}}
