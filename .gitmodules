@@ -1,12 +1,6 @@
-[submodule "vim/.config/vim/pack/plugins/start/goyo"]
-	path = vim/.config/vim/pack/plugins/start/goyo
-	url = git@github.com:junegunn/goyo.vim.git
 [submodule "awesome/.config/awesome/lain"]
 	path = awesome/.config/awesome/lain
 	url = git@github.com:copycat-killer/lain.git
-[submodule "awesome/.config/awesome/pomodoro"]
-	path = awesome/.config/awesome/pomodoro
-	url = git@github.com:nikolavp/awesome-pomodoro.git
 [submodule "vim/.config/vim/pack/plugins/start/editorconfig"]
 	path = vim/.config/vim/pack/plugins/start/editorconfig
 	url = git@github.com:editorconfig/editorconfig-vim.git
