@@ -296,7 +296,9 @@ globalkeys = awful.util.table.join(
               {description = "lua execute prompt", group = "awesome"}),
 
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
+    awful.key({ modkey }, "p", function()
+                  os.execute("rofi -show run")
+              end,
               {description = "show the menubar", group = "launcher"}),
 
     -- Wibox
