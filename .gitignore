@@ -1,4 +1,5 @@
 *.swp
+*.tmp
 bash/.bash_utils/private
 vim/.config/vim/backup/
 vim/.config/vim/undo/
