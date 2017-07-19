@@ -1,0 +1,42 @@
+startup_message off
+
+escape s-j
+
+set border 5
+set font "FiraMono-12"
+set winliststyle row
+set winfmt [%n] %s %t
+set winname class
+set wingravity c
+set maxsizegravity c
+
+set barpadding 5 0
+set bargravity ne
+
+# workspaces
+exec rpws init 4 -k
+
+bind F1 exec rpws 1
+bind F2 exec rpws 2
+bind F3 exec rpws 3
+bind F4 exec rpws 4
+
+#Shortcuts
+bind C-r restart
+bind c exec urxvt
+bind C-c exec urxvt
+
+definekey top Print exec scrot $HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H--%M--%S).png
+definekey top XF86AudioRaiseVolume exec amixer -q set Master 6%+
+definekey top XF86AudioLowerVolume exec amixer -q set Master 6%-
+definekey top XF86AudioMute exec amixer -q set Master playback toggle
+
+# Screen
+set padding 0 20 0 0
+
+# Hooks
+addhook switchwin info [%n] %t
+addhook switchframe info [%n] %t
+
+# Background
+exec xsetroot -solid "#85B2A4"
