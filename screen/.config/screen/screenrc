@@ -19,6 +19,9 @@ altscreen on
 # Name column windowlist
 windowlist string "%4n %h%=%f"
 
+# Logfile
+logfile ~/.config/screen/screen-%n-%H-%y%m%d.log
+
 # Hardstatus & Caption
 hardstatus alwayslastline
 hardstatus string '%{= wK} %-Lw%{+ wK}(#)%n%f %t%{-}%+Lw %= Session: %S'
