@@ -1,8 +1,16 @@
 startup_message off
 
 escape s-j
+bind Escape abort
 
-set border 5
+set border 3
+
+set bgcolor #FFFFFF
+set fgcolor #000000
+
+set fwcolor #D5C378
+set bwcolor #E8D99A
+
 set font "FiraMono-12"
 set winliststyle row
 set winfmt [%n] %s %t
@@ -21,10 +29,11 @@ bind F2 exec rpws 2
 bind F3 exec rpws 3
 bind F4 exec rpws 4
 
-#Shortcuts
+# Shortcuts
 bind C-r restart
 bind c exec urxvt
 bind C-c exec urxvt
+bind space exec rofi -show run
 
 definekey top Print exec scrot $HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H--%M--%S).png
 definekey top XF86AudioRaiseVolume exec amixer -q set Master 6%+
@@ -39,4 +48,7 @@ addhook switchwin info [%n] %t
 addhook switchframe info [%n] %t
 
 # Background
-exec xsetroot -solid "#85B2A4"
+exec xsetroot -solid "#E8D99A"
+exec $HOME/.config/ratpoison/plugins/dzen_widgets.sh | dzen2 -h 20 -ta l -fn "lucy tewii-8" -p
+
+

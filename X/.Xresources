@@ -74,3 +74,8 @@ URxvt.iso14755_52: false
 
 ! Cursor
 URxvt.cursorBlink: 1
+
+! DZEN2
+dzen2.foreground: #4F4B42
+dzen2.background: #E9D99A
+
