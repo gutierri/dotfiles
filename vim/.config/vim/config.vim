@@ -44,13 +44,13 @@ set wildignore=.svn,.hg,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.
 
 " Settings Backup and change folders {{{
 
-set backup writebackup
-set undofile
-set undodir=~/.config/vim/undo/
-set backupdir=~/.config/vim/backup/
-set directory=~/.config/vim/swap/
-let viminfopath="~/.config/vim/viminfo"
-
+silent !mkdir -p ~/.config/vim/{backup,swap,undo}/
+silent !mkdir -p ~/.cache/vim/
+set backup writebackup undofile
+set undodir=~/.config/vim/undo//
+set backupdir=~/.config/vim/backup//
+set directory=~/.config/vim/swap//
+let viminfopath="~/.cache/vim/viminfo"
 let &viminfo .= ',n' . escape(viminfopath, ',')
 
 " }}}
@@ -92,8 +92,18 @@ hi Visual   ctermfg=black ctermbg=white
 augroup settingsfiletypes
     autocmd!
     autocmd BufRead,BufNewFile *.{txt,md} setlocal wrap textwidth=79 colorcolumn=79
-    autocmd BufRead,BufNewFile *.{py} setlocal textwidth=79 colorcolumn=79
-    autocmd BufRead,BufNewFile *.{sh} setlocal noexpandtab
+    autocmd BufRead,BufNewFile *.py setlocal textwidth=79 colorcolumn=79
+    autocmd BufRead,BufNewFile *.sh setlocal noexpandtab
+    autocmd FileType go setlocal noexpandtab noshiftround tabstop=8 softtabstop=8 shiftwidth=8
+    autocmd BufRead,BufNewFile Dockerfile setlocal noexpandtab
+    autocmd BufRead,BufNewFile Makefile setlocal noexpandtab noshiftround tabstop=8 softtabstop=8 shiftwidth=8
 augroup END
 
 " }}}
+
+" Extra {{{
+" GoLang Lint
+set runtimepath+=$GOPATH/src/github.com/golang/lint/mist/vim
+autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+
+"}}}
