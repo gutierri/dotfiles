@@ -44,9 +44,13 @@ workspace(){
 	echo -n "$p_works"
 }
 
+disk(){
+	echo -n "DISK :: / $(df -h | grep /$ | rev | cut -d ' ' -f2 | rev) /home $(df -h | grep home/ | rev | cut -d ' ' -f2 | rev)"
+}
+
 while true
 do
-	echo -n "^p(_LEFT)$(workspace)^p(_RIGHT)^p(-482)$(mem)    $(vol)    $(bat)    $(clock_date)"
+	echo -n "^p(_LEFT)$(workspace)^p(_RIGHT)^p(-634)$(disk)    $(mem)    $(vol)    $(bat)    $(clock_date)"
 	echo
 	sleep 1
 done
