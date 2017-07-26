@@ -21,6 +21,11 @@ set maxsizegravity c
 set barpadding 5 0
 set bargravity ne
 
+rudeness 12
+
+unmanage Qt-ponies
+unmanage qt-ponies
+
 # workspaces
 exec rpws init 4 -k
 
@@ -34,6 +39,9 @@ bind C-r restart
 bind c exec urxvt
 bind C-c exec urxvt
 bind space exec rofi -show run
+bind slash exec ratpoison -i -c "select -" -c fselect -c "other" -c "focuslast" -c "other"
+bind G    set padding 0 20 0 0
+bind g    set padding 0 0 0 0
 
 definekey top Print exec scrot $HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H--%M--%S).png
 definekey top XF86AudioRaiseVolume exec amixer -q set Master 6%+
@@ -49,6 +57,6 @@ addhook switchframe info [%n] %t
 
 # Background
 exec xsetroot -solid "#E8D99A"
+
+# Start dzen2
 exec $HOME/.config/ratpoison/plugins/dzen_widgets.sh | dzen2 -h 20 -ta l -fn "lucy tewii-8" -p
-
-
