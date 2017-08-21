@@ -17,13 +17,15 @@ shopt -s cdspell
 
 # Call Scripts
 if [ -d "$HOME/.bash_utils" ]; then
-    for file in "$HOME/.bash_utils/"*; do
-        if [ -f "$file" ]; then
-            source "${file}"
-        elif [ -d ${file} ]; then
-            for private_files in "${file}/"*; do
-                source "${private_files}"
-            done
-        fi
-    done
+	for file in "$HOME/.bash_utils/"*; do
+		if [ -f "$file" ]; then
+			source "${file}"
+		elif [ -d ${file} ]; then
+			for private_files in "${file}/"*; do
+				if [ -f "$private_files" ]; then
+					source "${private_files}"
+				fi
+			done
+		fi
+	done
 fi
