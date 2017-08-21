@@ -28,20 +28,21 @@ bat(){
 }
 
 workspace(){
-	local n_works=$(ratpoison -c groups | grep -oP "^[0-9].")
-	local p_works=""
+	local groups=$(ratpoison -c groups | grep -oP "^[0-9].")
+	local works=""
 
-	for w in $n_works
+	for workspace in $groups
 	do
-		if [ -z $(grep "*" <<< $w) ]
+		local workspace_n=$(sed 's/[^0-9]//g' <<< $workspace)
+		if [ -z $(grep "*" <<< $workspace) ]
 		then
-			p_works+=" $(sed 's/[^0-9]//g' <<< $w) "
+			works+=" $(echo $workspace_n + 1 | bc) "
 		else
-			p_works+=" [$(sed 's/[^0-9]//g' <<< $w)] "
+			works+=" [$(echo $workspace_n + 1 | bc)] "
 		fi
 	done
 
-	echo -n "$p_works"
+	echo -n "$works <$(ratpoison -c windows | wc -l)>"
 }
 
 disk(){
