@@ -2,7 +2,7 @@
 [[ $- != *i* ]] && return
 
 # Start Screen
-[[ -z "$STY" ]] && screen -R default
+[[ -z "$STY" ]] && screen -d -RR -c ~/.config/screen/screenrc
 
 # Exports
 export EDITOR="vim"
@@ -15,34 +15,15 @@ PATH=$PATH:$HOME/.local/bin
 # Sets
 shopt -s cdspell
 
-# Call scripts
-source /usr/share/git/completion/git-prompt.sh
-
-# Alias
-alias ls='ls -F -v'
-alias ll='ls -laF --group-directories-first -v'
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ~="cd ~"
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
-alias targz='tar -zxvf'
-alias e='vim'
-alias cp='cp -i -v'
-alias mv='mv -i -v'
-alias rm='rm -i -v'
-alias aur='yaourt'
-alias refresh='source ~/.bashrc'
-
-# Prompt
-
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWUPSTREAM="auto"
-export GIT_PS1_DESCRIBE_STYLE="branch"
-PS1='\u \[\e[1;91m\]at\[\e[0m\] \h \[\e[1;91m\]in\[\e[0m\] \W$(__git_ps1 " \[\e[1;91m\]on\[\e[0m\] git:%s")\n% '
-PS2='... '
+# Call Scripts
+if [ -d "$HOME/.bash_utils" ]; then
+    for file in "$HOME/.bash_utils/"*; do
+        if [ -f "$file" ]; then
+            source "${file}"
+        elif [ -d ${file} ]; then
+            for private_files in "${file}/"*; do
+                source "${private_files}"
+            done
+        fi
+    done
+fi
