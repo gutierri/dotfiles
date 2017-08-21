@@ -1,14 +1,15 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Start Screen
-[[ -z "$STY" ]] && screen -d -RR -c ~/.config/screen/screenrc
-
 # Exports
 export EDITOR="vim"
 export LANG=en_US.UTF-8
 export VISUAL="${EDITOR}"
 export VIMINIT='let $MYVIMRC="$HOME/.config/vim/config.vim" | source $MYVIMRC'
+export SCREENRC="${HOME}/.config/screen/screenrc"
+
+# Start Screen
+[[ -z "$STY" ]] && screen -d -RR
 
 PATH=$PATH:$HOME/.local/bin
 
