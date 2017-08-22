@@ -7,6 +7,7 @@ export LANG=en_US.UTF-8
 export VISUAL="${EDITOR}"
 export VIMINIT='let $MYVIMRC="$HOME/.config/vim/config.vim" | source $MYVIMRC'
 export SCREENRC="${HOME}/.config/screen/screenrc"
+export PROMPT_COMMAND='history -a'
 
 # Start Screen
 [[ -z "$STY" ]] && screen -d -RR
