@@ -1,7 +1,5 @@
 startup_message off
-
 escape s-j
-bind Escape abort
 
 set border 3
 
@@ -27,14 +25,15 @@ unmanage Qt-ponies
 unmanage qt-ponies
 
 # workspaces
-exec rpws init 4 -k
+vinit
 
-bind F1 exec rpws 1
-bind F2 exec rpws 2
-bind F3 exec rpws 3
-bind F4 exec rpws 4
+bind F1 exec vselect 1
+bind F2 exec vselect 2
+bind F3 exec vselect 3
+bind F4 exec vselect 4
 
 # Shortcuts
+bind Escape abort
 bind C-r restart
 bind c exec urxvt
 bind C-c exec urxvt
