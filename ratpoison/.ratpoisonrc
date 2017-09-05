@@ -1,36 +1,35 @@
 startup_message off
 escape s-j
 
-set border 3
-
-set bgcolor #FFFFFF
-set fgcolor #000000
-
-set fwcolor #D5C378
-set bwcolor #E8D99A
-
-set font "FiraMono-12"
+# msgwait 3
+set barborder 0
+set bargravity nw
+set barpadding 20 10
+set barinpadding 1
+set barsticky on
+set bgcolor #5E5E5E
+set fgcolor #CACACA
+set font "lucy tewii:size=11"
+set inputwidth 0
+set padding 10 30 10 10
 set winliststyle row
-set winfmt [%n] %s %t
-set winname class
-set wingravity c
-set maxsizegravity c
+set winfmt %t
+set framefmt frame %f (%wx%h)
 
-set barpadding 5 0
-set bargravity ne
+set border 3
+set gap 4
+set fwcolor #202020
+set bwcolor #5E5E5E
 
-rudeness 12
-
-unmanage Qt-ponies
-unmanage qt-ponies
+set winname title
 
 # workspaces
 vinit
 
-bind F1 exec vselect 1
-bind F2 exec vselect 2
-bind F3 exec vselect 3
-bind F4 exec vselect 4
+bind F1 vselect 1
+bind F2 vselect 2
+bind F3 vselect 3
+bind F4 vselect 4
 
 # Shortcuts
 bind Escape abort
@@ -39,26 +38,28 @@ bind c exec urxvt
 bind C-c exec urxvt
 bind space exec rofi -show run
 bind slash exec ratpoison -i -c "select -" -c fselect -c "other" -c "focuslast" -c "other"
-bind G set padding 0 20 0 0
-bind g set padding 0 0 0 0
+bind S split
+bind C-S split
+bind bar hsplit
 
 definekey top Print exec scrot $HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H--%M--%S).png
 definekey top XF86AudioRaiseVolume exec amixer -q set Master 6%+
 definekey top XF86AudioLowerVolume exec amixer -q set Master 6%-
 definekey top XF86AudioMute exec amixer -q set Master playback toggle
-definekey top XF86WakeUp exec light-locker-command -l
+definekey top XF86ScreenSaver exec light-locker-command -l
 definekey top XF86MonBrightnessUp exec xbacklight +20%
 definekey top XF86MonBrightnessDown exec xbacklight -20%
 
-# Screen
-set padding 0 20 0 0
+definekey top XF86AudioPrev exec mpc prev
+definekey top XF86AudioPlay exec mpc toggle
+definekey top XF86AudioNext exec mpc next
 
 # Hooks
 addhook switchwin info [%n] %t
 addhook switchframe info [%n] %t
 
-# Background
-exec xsetroot -solid "#E8D99A"
+# Java Applications
+exec wmname LG3D
 
-# Start dzen2
-exec $HOME/.config/ratpoison/plugins/dzen_widgets.sh | dzen2 -h 20 -ta l -fn "lucy tewii-8" -p
+# Background
+exec xsetroot -solid "#5E5E5E"
