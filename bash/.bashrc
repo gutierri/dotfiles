@@ -10,7 +10,13 @@ export SCREENRC="${HOME}/.config/screen/screenrc"
 export PROMPT_COMMAND='history -a'
 
 # Start Screen
-[[ -z "$STY" ]] && screen -d -RR
+if [ -z "$STY" ]; then
+	if screen -ls | grep -i work > /dev/null 2>&1; then
+		echo "Work session it's running..."
+	else
+		screen -S WORK
+	fi
+fi
 
 PATH=$PATH:$HOME/.local/bin
 
