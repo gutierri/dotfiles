@@ -1,9 +1,9 @@
-#define base00 #FFFFFF
+#define base00 #EBEBEB
 #define base01 #e3e3e3
 #define base02 #b9b9b9
 #define base03 #ababab
 #define base04 #525252
-#define base05 #000000
+#define base05 #2F2F2F
 #define base06 #252525
 #define base07 #101010
 #define base08 #7c7c7c
