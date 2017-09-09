@@ -18,7 +18,7 @@ set framefmt frame %f (%wx%h)
 
 set border 3
 set gap 4
-set fwcolor #202020
+set fwcolor #e6940e
 set bwcolor #5E5E5E
 
 set winname title
@@ -36,7 +36,7 @@ bind Escape abort
 bind C-r restart
 bind c exec urxvt
 bind C-c exec urxvt
-bind space exec rofi -show run
+bind space exec rofi -modi "drun,passwordstorage:/tmp/passmenu" -show drun
 bind slash exec ratpoison -i -c "select -" -c fselect -c "other" -c "focuslast" -c "other"
 bind S split
 bind C-S split
