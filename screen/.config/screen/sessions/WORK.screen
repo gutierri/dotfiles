@@ -1,0 +1,7 @@
+source ~/.config/screen/screenrc
+
+screen -t irssi 1 irssi
+screen -t e-mail 2
+screen -t htop 3 htop
+screen -t journal 4 journalctl -xe
+select 1

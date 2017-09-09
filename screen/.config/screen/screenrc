@@ -11,7 +11,7 @@ escape ^Jj
 maptimeout 5
 
 # 256 colors on rxvt
-term rxvt-unicode-256color
+term screen-256color
 
 # Fix residual editors
 altscreen on
