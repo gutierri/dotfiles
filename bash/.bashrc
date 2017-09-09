@@ -14,11 +14,11 @@ if [ -z "$STY" ]; then
 	if screen -ls | grep -i work > /dev/null 2>&1; then
 		echo "Work session it's running..."
 	else
-		screen -S WORK
+		screen -S WORK -c $HOME/.config/screen/sessions/WORK.screen
 	fi
 fi
 
-PATH=$PATH:$HOME/.local/bin
+PATH=$PATH:$HOME/.local/bin:$HOME/.gem/ruby/2.4.0/bin
 
 # Sets
 shopt -s cdspell
