@@ -8,6 +8,7 @@ export VISUAL="${EDITOR}"
 export VIMINIT='let $MYVIMRC="$HOME/.config/vim/config.vim" | source $MYVIMRC'
 export SCREENRC="${HOME}/.config/screen/screenrc"
 export PROMPT_COMMAND='history -a'
+export GOPATH="$HOME/Workspace/golang"
 
 # Start Screen
 if [ -z "$STY" ]; then
@@ -18,7 +19,10 @@ if [ -z "$STY" ]; then
 	fi
 fi
 
-PATH=$PATH:$HOME/.local/bin:$HOME/.gem/ruby/2.4.0/bin
+# Paths
+PATH="$PATH:$HOME/.local/bin"
+PATH="$PATH:$HOME/Workspace/golang/bin"
+PATH="$PATH:$HOME/.gem/ruby/2.4.0/bin"
 
 # Sets
 shopt -s cdspell
@@ -37,3 +41,6 @@ if [ -d "$HOME/.bash_utils" ]; then
 		fi
 	done
 fi
+source /home/gutierri/Workspace/screen-workdir.sh/screen-workdir.sh
+source <(doctl completion bash)
+

@@ -91,13 +91,13 @@ hi Visual   ctermfg=black ctermbg=white
 
 augroup settingsfiletypes
     autocmd!
-    autocmd BufRead,BufNewFile *.{txt,md} setlocal wrap textwidth=79 colorcolumn=79
-    autocmd BufRead,BufNewFile *.{py,coffee} setlocal textwidth=79 colorcolumn=79
+    autocmd BufRead,BufNewFile *.{txt,md} setlocal wrap
+    autocmd BufRead,BufNewFile *.{py,coffee,txt,md} setlocal textwidth=79 colorcolumn=79
     autocmd BufRead,BufNewFile .bashrc,*.sh setlocal noexpandtab
     autocmd FileType go setlocal noexpandtab noshiftround tabstop=8 softtabstop=8 shiftwidth=8
     autocmd BufRead,BufNewFile Dockerfile setlocal noexpandtab
     autocmd BufRead,BufNewFile Makefile setlocal noexpandtab noshiftround tabstop=8 softtabstop=8 shiftwidth=8
-    autocmd BufRead,BufNewFile *.coffee setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufRead,BufNewFile *.{coffee,yml} setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
 " }}}

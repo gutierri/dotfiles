@@ -7,3 +7,6 @@
 [submodule "vim/.config/vim/pack/plugins/start/coffeescript"]
 	path = vim/.config/vim/pack/plugins/start/coffeescript
 	url = git@github.com:kchmck/vim-coffee-script.git
+[submodule "vim/.config/vim/pack/plugins/start/unimpaired"]
+	path = vim/.config/vim/pack/plugins/start/unimpaired
+	url = git@github.com:tpope/vim-unimpaired.git

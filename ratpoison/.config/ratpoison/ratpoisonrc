@@ -1,46 +1,42 @@
 startup_message off
 escape s-j
 
-# msgwait 3
+msgwait 3
 set barborder 0
-set bargravity nw
 set barpadding 20 10
-set barinpadding 1
-set barsticky on
 set bgcolor #5E5E5E
 set fgcolor #CACACA
 set font "lucy tewii:size=11"
 set inputwidth 0
-set padding 10 30 10 10
-set winliststyle row
-set winfmt %t
+set padding 0 0 0 0
 set framefmt frame %f (%wx%h)
+set onlyborder 0
 
 set border 3
-set gap 4
 set fwcolor #e6940e
 set bwcolor #5E5E5E
 
 set winname title
 
 # workspaces
-vinit
+exec rpws init 4 -k
 
-bind F1 vselect 1
-bind F2 vselect 2
-bind F3 vselect 3
-bind F4 vselect 4
+bind F1 exec rpws 1
+bind F2 exec rpws 2
+bind F3 exec rpws 3
+bind F4 exec rpws 4
 
 # Shortcuts
 bind Escape abort
 bind C-r restart
 bind c exec urxvt
 bind C-c exec urxvt
-bind space exec rofi -modi "drun,passwordstorage:/tmp/passmenu" -show drun
+bind space exec rofi -modi "drun,run" -show drun
 bind slash exec ratpoison -i -c "select -" -c fselect -c "other" -c "focuslast" -c "other"
 bind S split
 bind C-S split
 bind bar hsplit
+bind d exec sh /usr/local/share/ratpoison/ratdate.sh
 
 definekey top Print exec scrot $HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H--%M--%S).png
 definekey top XF86AudioRaiseVolume exec amixer -q set Master 6%+
@@ -60,6 +56,13 @@ addhook switchframe info [%n] %t
 
 # Java Applications
 exec wmname LG3D
+
+# Unmanage windows
+unmanage stalonetray
+unmanage pinentry
+
+# Startup script
+exec ~/.config/ratpoison/scripts/startup.sh
 
 # Background
 exec xsetroot -solid "#5E5E5E"

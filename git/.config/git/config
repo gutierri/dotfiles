@@ -6,7 +6,10 @@
 	ui = auto
 [core]
 	editor = vim
+	excludesfile = /home/gutierri/.config/git/ignore
 [diff]
 	tool = vimdiff
 [commit]
 	gpgsign = true
+[alias]
+	git = !exec git

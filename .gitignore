@@ -7,3 +7,5 @@ vim/.config/vim/swap/
 vim/.config/vim/session/
 vim/.config/vim/viminfo
 irssi/.irssi/config
+git/.config/git/ignore
+gtk/.config/gtk-3.0/bookmarks

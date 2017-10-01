@@ -47,7 +47,7 @@
 *.color21:      base06
 
 ! Fonts
-URxvt.font:xft:Fira Mono:Medium:pixelsize=16
+URxvt.font:xft:Input Mono:Regular:pixelsize=14
 
 ! Scroll
 
@@ -75,13 +75,15 @@ URxvt.iso14755_52: false
 ! Cursor
 URxvt.cursorBlink: 1
 
+urxvt*internalBorder: 4 #change urxvt to xterm if necessary. Using the font terminus in urxvt at 14px size, 8 is the correct number here.
+
 ! DZEN2
 dzen2.foreground: #4F4B42
 dzen2.background: #E9D99A
 
 ! Rofi
 rofi.color-enabled: true
-rofi.color-window: #5e5e5e, #002b36, #000000
-rofi.color-normal: #5e5e5e, #cacaca, #5e5e5e, #5e5e5e, #ffc100
+rofi.color-window: base05, #002b36, #000000
+rofi.color-normal: base05, #cacaca, base05, base05, #ffc100
 rofi.color-active: #fdf6e3, #268bd2, #eee8d5, #268bd2, #fdf6e3
 rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3

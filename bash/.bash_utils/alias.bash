@@ -19,3 +19,5 @@ alias rm='rm -i -v'
 alias aur='yaourt'
 alias refresh='source ~/.bashrc'
 alias screen-killall='screen -ls | grep -ioP "^\t.+?\." | sed -s "s/\t//g;s/\.//g" | xargs kill'
+alias zz='funcoeszz'
+alias todo=todo.sh
