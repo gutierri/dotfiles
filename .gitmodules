@@ -10,3 +10,6 @@
 [submodule "vim/.config/vim/pack/plugins/start/unimpaired"]
 	path = vim/.config/vim/pack/plugins/start/unimpaired
 	url = git@github.com:tpope/vim-unimpaired.git
+[submodule "screen/.config/screen/scripts/workdir.sh"]
+	path = screen/.config/screen/scripts/workdir.sh
+	url = https://github.com/gutierri/screen-workdir.sh.git
