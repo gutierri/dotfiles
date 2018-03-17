@@ -3,7 +3,7 @@
 	name = Gutierri Barboza
 	signingkey = 559063220EDC0F4F
 [color]
-	ui = auto
+	ui = false
 [core]
 	editor = vim
 	excludesfile = /home/gutierri/.config/git/ignore

@@ -71,6 +71,8 @@ imap <RIGHT> <NOP>
 nmap <F8> o<Esc>
 nmap <F9> O<Esc>
 
+" Drop F1
+nmap <F1> <nop>
 " }}}
 
 " Location default settings {{{
@@ -82,8 +84,7 @@ let &packpath.=',~/.config/vim,~/.config/vim/after'
 
 " Colorscheme custom {{{
 
-hi Normal   ctermfg=white ctermbg=black
-hi Visual   ctermfg=black ctermbg=white
+set t_Co=0
 
 " }}}
 
@@ -93,7 +94,7 @@ augroup settingsfiletypes
     autocmd!
     autocmd BufRead,BufNewFile *.{txt,md} setlocal wrap
     autocmd BufRead,BufNewFile *.{py,coffee,txt,md} setlocal textwidth=79 colorcolumn=79
-    autocmd BufRead,BufNewFile .bashrc,*.sh setlocal noexpandtab
+    autocmd BufRead,BufNewFile .bashrc,*.sh setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
     autocmd FileType go setlocal noexpandtab noshiftround tabstop=8 softtabstop=8 shiftwidth=8
     autocmd BufRead,BufNewFile Dockerfile setlocal noexpandtab
     autocmd BufRead,BufNewFile Makefile setlocal noexpandtab noshiftround tabstop=8 softtabstop=8 shiftwidth=8
@@ -103,6 +104,7 @@ augroup END
 " }}}
 
 " Extra {{{
+
 " GoLang Lint
 set runtimepath+=$GOPATH/src/github.com/golang/lint/mist/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow

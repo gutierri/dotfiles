@@ -4,7 +4,7 @@ bash/.bash_utils/private
 vim/.config/vim/backup/
 vim/.config/vim/undo/
 vim/.config/vim/swap/
-vim/.config/vim/session/
+vim/.config/vim/sessions/
 vim/.config/vim/viminfo
 irssi/.irssi/config
 git/.config/git/ignore

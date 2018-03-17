@@ -41,6 +41,4 @@ if [ -d "$HOME/.bash_utils" ]; then
 		fi
 	done
 fi
-source /home/gutierri/Workspace/screen-workdir.sh/screen-workdir.sh
-source <(doctl completion bash)
-
+source $HOME/.config/screen/scripts/workdir.sh/screen-workdir.sh
