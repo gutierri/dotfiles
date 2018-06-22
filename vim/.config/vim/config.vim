@@ -1,5 +1,4 @@
 " Settings {{{
-syntax off
 filetype indent on
 
 set nocompatible                " no compatible with vi
@@ -44,12 +43,14 @@ set wildignore=.svn,.hg,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.
 
 " Settings Backup and change folders {{{
 
-silent !mkdir -p ~/.config/vim/{backup,swap,undo}/
-silent !mkdir -p ~/.cache/vim/
+silent !mkdir -p ~/.cache/vim/swap/
+silent !mkdir -p ~/.local/share/vim/{backup,undo}
+
 set backup writebackup undofile
-set undodir=~/.config/vim/undo//
-set backupdir=~/.config/vim/backup//
-set directory=~/.config/vim/swap//
+set undodir=~/.local/share/vim/undo//
+set backupdir=~/.local/share/vim/backup//
+set directory=~/.cache/vim/swap//
+
 let viminfopath="~/.cache/vim/viminfo"
 let &viminfo .= ',n' . escape(viminfopath, ',')
 
@@ -73,6 +74,7 @@ nmap <F9> O<Esc>
 
 " Drop F1
 nmap <F1> <nop>
+
 " }}}
 
 " Location default settings {{{
@@ -102,11 +104,3 @@ augroup settingsfiletypes
 augroup END
 
 " }}}
-
-" Extra {{{
-
-" GoLang Lint
-set runtimepath+=$GOPATH/src/github.com/golang/lint/mist/vim
-autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
-
-"}}}
