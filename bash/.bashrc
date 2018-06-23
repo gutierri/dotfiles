@@ -8,21 +8,18 @@ export VISUAL="${EDITOR}"
 export VIMINIT='let $MYVIMRC="$HOME/.config/vim/config.vim" | source $MYVIMRC'
 export SCREENRC="${HOME}/.config/screen/screenrc"
 export PROMPT_COMMAND='history -a'
-export GOPATH="$HOME/Workspace/golang"
 
 # Start Screen
 if [ -z "$STY" ]; then
 	if screen -ls | grep -i work > /dev/null 2>&1; then
 		echo "Work session it's running..."
 	else
-		screen -S WORK -c $HOME/.config/screen/sessions/WORK.screen
+		screen -S home
 	fi
 fi
 
 # Paths
 PATH="$PATH:$HOME/.local/bin"
-PATH="$PATH:$HOME/Workspace/golang/bin"
-PATH="$PATH:$HOME/.gem/ruby/2.4.0/bin"
 
 # Sets
 shopt -s cdspell
