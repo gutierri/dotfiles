@@ -1,0 +1,15 @@
+#!/usr/bin/env aptfile
+
+package "ratpoison"
+package "screen"
+package "stow"
+package "parallel"
+package "curl"
+package "git"
+package "vim"
+package "firefox-esr"
+package "rxvt-unicode"
+package "pass"
+package "redshift"
+
+echo "💃 Packages idone!"
