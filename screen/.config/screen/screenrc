@@ -34,3 +34,11 @@ screen 1
 
 # Save layout after detached and attached
 layout save default
+
+# Binds vi-like for jump regions
+bind j focus down
+bind k focus up
+bind l focus right
+bind h focus left
+
+shell -$SHELL
