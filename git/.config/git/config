@@ -13,3 +13,24 @@
 	gpgsign = true
 [alias]
 	git = !exec git
+	s = status
+	c = commit
+	ca = commit --amend
+	can = commit --amend --no-edit
+	b = branch
+	co = checkout
+	cl = clone
+	d = diff
+	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	a = add
+	ph = push
+	phf = push --force
+	pl = pull
+	pla = pull --all
+	sh = stash
+	shl = stash list
+	sw = show
+	uncommit = reset --soft HEAD~1
+	cleanout = !git clean -df && git checkout -- .
+	open-last = !vim -O $(git diff-tree --no-commit-id --name-only -r HEAD)
+
