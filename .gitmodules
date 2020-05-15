@@ -1,15 +1,6 @@
 [submodule "awesome/.config/awesome/lain"]
 	path = awesome/.config/awesome/lain
 	url = git@github.com:copycat-killer/lain.git
-[submodule "vim/.config/vim/pack/plugins/start/editorconfig"]
-	path = vim/.config/vim/pack/plugins/start/editorconfig
-	url = git@github.com:editorconfig/editorconfig-vim.git
-[submodule "vim/.config/vim/pack/plugins/start/coffeescript"]
-	path = vim/.config/vim/pack/plugins/start/coffeescript
-	url = git@github.com:kchmck/vim-coffee-script.git
-[submodule "vim/.config/vim/pack/plugins/start/unimpaired"]
-	path = vim/.config/vim/pack/plugins/start/unimpaired
-	url = git@github.com:tpope/vim-unimpaired.git
 [submodule "screen/.config/screen/scripts/workdir.sh"]
 	path = screen/.config/screen/scripts/workdir.sh
 	url = https://github.com/gutierri/screen-workdir.sh.git

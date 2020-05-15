@@ -6,6 +6,8 @@ vim/.config/vim/undo/
 vim/.config/vim/swap/
 vim/.config/vim/sessions/
 vim/.config/vim/viminfo
+vim/.config/vim/plugged/
 irssi/.irssi/config
 git/.config/git/ignore
 gtk/.config/gtk-3.0/bookmarks
+vim/.config/vim/autoload/plug.vim

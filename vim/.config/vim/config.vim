@@ -1,4 +1,5 @@
 " Settings {{{
+syntax on
 filetype indent on
 
 set nocompatible                " no compatible with vi
@@ -37,23 +38,21 @@ set ignorecase
 set hlsearch
 
 " Ignore files
-set wildignore=.svn,.hg,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc
+set wildignore=.svn,.hg,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc,node_modules
 
+set shellpipe+=\ " fixs output quickfix with :Make on dispatch
 "}}}
 
 " Settings Backup and change folders {{{
-
-silent !mkdir -p ~/.cache/vim/swap/
-silent !mkdir -p ~/.local/share/vim/{backup,undo}
+silent !mkdir -p ~/.cache/vim/{swap,backup,undo}
 
 set backup writebackup undofile
-set undodir=~/.local/share/vim/undo//
-set backupdir=~/.local/share/vim/backup//
+set undodir=~/.cache/vim/undo//
+set backupdir=~/.cache/vim/backup//
 set directory=~/.cache/vim/swap//
 
 let viminfopath="~/.cache/vim/viminfo"
 let &viminfo .= ',n' . escape(viminfopath, ',')
-
 " }}}
 
 " Maps {{{
@@ -75,6 +74,12 @@ nmap <F9> O<Esc>
 " Drop F1
 nmap <F1> <nop>
 
+let mapleader = ","
+nmap <Leader><space> :noh<cr> " clean search highlight
+nmap <Leader>b :Make!<cr> " running build with makeprg default option via Dispatch
+nmap <Leader>t :Dispatch grep --exclude-dir='node_modules' -irn 'TODO:'<cr> " get TODO comment on project
+nmap <F5> :@:<cr> " running last command
+
 " }}}
 
 " Location default settings {{{
@@ -84,9 +89,35 @@ let &packpath.=',~/.config/vim,~/.config/vim/after'
 
 "}}}
 
+" Plugins {{{
+
+if empty(glob('~/.config/vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.config/vim/plugged')
+
+Plug 'gutierri/localset.vim'
+Plug 'airblade/vim-rooter'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-unimpaired'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'maralla/completor.vim'
+Plug 'direnv/direnv.vim'
+Plug 'blueyed/vim-diminactive'
+Plug 'editorconfig/editorconfig-vim'
+
+call plug#end()
+
+" }}}
+
 " Colorscheme custom {{{
 
-set t_Co=0
+colorscheme default
 
 " }}}
 
@@ -94,13 +125,20 @@ set t_Co=0
 
 augroup settingsfiletypes
     autocmd!
-    autocmd BufRead,BufNewFile *.{txt,md} setlocal wrap
-    autocmd BufRead,BufNewFile *.{py,coffee,txt,md} setlocal textwidth=79 colorcolumn=79
-    autocmd BufRead,BufNewFile .bashrc,*.sh setlocal noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
-    autocmd FileType go setlocal noexpandtab noshiftround tabstop=8 softtabstop=8 shiftwidth=8
-    autocmd BufRead,BufNewFile Dockerfile setlocal noexpandtab
-    autocmd BufRead,BufNewFile Makefile setlocal noexpandtab noshiftround tabstop=8 softtabstop=8 shiftwidth=8
-    autocmd BufRead,BufNewFile *.{coffee,yml} setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd FileType python setlocal textwidth=79 colorcolumn=79
+    autocmd BufRead,BufNewFile *.{txt,md,rst} setlocal wrap textwidth=79 colorcolumn=79
+    autocmd BufEnter,BufRead,BufNewFile * silent! execute 'set path+='. FindRootDirectory() . '/**'
 augroup END
+
+" }}}
+
+" Plugins settings {{{
+
+" vim/diminactive
+let g:diminactive_use_syntax = 1
+let g:diminactive_use_colorcolumn = 0
+
+" airblade/rooter
+let g:rooter_manual_only = 1
 
 " }}}
