@@ -11,5 +11,6 @@ package "firefox-esr"
 package "rxvt-unicode"
 package "pass"
 package "redshift"
+package "direnv"
 
-echo "💃 Packages idone!"
+echo "💃 Packages done!"
