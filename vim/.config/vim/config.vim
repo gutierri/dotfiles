@@ -38,9 +38,8 @@ set ignorecase
 set hlsearch
 
 " Ignore files
-set wildignore=.svn,.hg,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc,node_modules
+set wildignore=.svn,.hg,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc,node_modules,.tox
 
-set shellpipe+=\ " fixs output quickfix with :Make on dispatch
 "}}}
 
 " Settings Backup and change folders {{{
@@ -76,16 +75,15 @@ nmap <F1> <nop>
 
 let mapleader = ","
 nmap <Leader><space> :noh<cr> " clean search highlight
-nmap <Leader>b :Make!<cr> " running build with makeprg default option via Dispatch
-nmap <Leader>t :Dispatch grep --exclude-dir='node_modules' -irn 'TODO:'<cr> " get TODO comment on project
-nmap <F5> :@:<cr> " running last command
+nmap <Leader>b :AsyncRun -cwd=<root> -program=make @<cr> " running makeprg
+nmap <Leader>t :AsyncRun grep -irn 'TODO:'<cr> " get TODO comment on project
+noremap <Leader>q :call asyncrun#quickfix_toggle(8)<cr> " toggle quickfix
 
 " }}}
 
 " Location default settings {{{
 
 let &runtimepath.=',~/.config/vim,~/.config/vim/after'
-let &packpath.=',~/.config/vim,~/.config/vim/after'
 
 "}}}
 
@@ -102,13 +100,14 @@ call plug#begin('~/.config/vim/plugged')
 Plug 'gutierri/localset.vim'
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'maralla/completor.vim'
 Plug 'direnv/direnv.vim'
 Plug 'blueyed/vim-diminactive'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'majutsushi/tagbar'
 Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
@@ -117,7 +116,7 @@ call plug#end()
 
 " Colorscheme custom {{{
 
-colorscheme default
+colorscheme peachpuff
 
 " }}}
 
@@ -135,10 +134,16 @@ augroup END
 " Plugins settings {{{
 
 " vim/diminactive
-let g:diminactive_use_syntax = 1
-let g:diminactive_use_colorcolumn = 0
+let g:diminactive_use_syntax = 1 " use syntax disable on unactive window
+let g:diminactive_use_colorcolumn = 0 " disable use of colorcolumn in unactive windows
 
 " airblade/rooter
-let g:rooter_manual_only = 1
+let g:rooter_manual_only = 1 " disable auto root directory insert on set path vim
+
+" skywind3000/asyncrun.vim
+let g:asyncrun_open = 7 " height quickfix run asyncrun command
+
+" majutsushi/tagbar
+nmap <F8> :TagbarToggle<CR>
 
 " }}}
