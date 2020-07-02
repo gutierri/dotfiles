@@ -2,20 +2,18 @@ set startupmessage off
 escape s-j
 
 set msgwait 3
-set barborder 0
+set barborder 2
 set barpadding 10 5
 set bgcolor #EBEBEB
 set fgcolor #2F2F2F
-set font "lucy tewii:size=11"
+set font "terminus:size=9"
 set inputwidth 0
 set padding 0 0 0 0
-set framefmt frame %f (%wx%h)
+set framefmt [%f] %c (%wx%h)
 set onlyborder 0
 
-set gap 5
-
 set border 3
-set fwcolor #2F2F2F
+set fwcolor #ef4291
 set bwcolor #9F9F9F
 
 set winname title
@@ -32,16 +30,44 @@ bind F4 exec rpws 4
 
 # Shortcuts
 bind Escape abort
+
 bind C-r restart
+
 bind c exec urxvt
 bind C-c exec urxvt
+
 bind space exec rofi -modi "drun,run" -show drun
-bind slash exec ratpoison -i -c "select -" -c fselect -c "other" -c "focuslast" -c "other"
+
+bind slash swap
+
 bind S split
 bind C-S split
 bind bar hsplit
-bind Tab focuslast
-bind ISO_Left_Tab focus
+
+# vi moves
+bind h focusleft
+bind j focusdown
+bind k focusup
+bind l focusright
+bind C-h exchangeleft
+bind C-j exchangedown
+bind C-k exchangeup
+bind C-l exchangeright
+
+# tab cycles windows
+bind Tab focus
+bind ISO_Left_Tab focusprev
+
+# (wip) gnu screen binds
+bind K delete
+bind C-K kill
+
+bind x exec light-locker-command -l
+bind X remove
+bind M-h removeleft
+bind M-j removedown
+bind M-k removeup
+bind M-l removeright
 
 definekey top Print exec scrot $HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H--%M--%S).png
 definekey top XF86AudioRaiseVolume exec amixer -q set Master 6%+

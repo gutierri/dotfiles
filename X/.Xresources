@@ -47,8 +47,8 @@
 *.color21:      base06
 
 ! Fonts
-URxvt.font:xft:Input Mono:Regular:pixelsize=14
-xterm.font:xft:Input Mono:Regular:pixelsize=14
+URxvt.font:xft:Inconsolata:Medium:pixelsize=14
+xterm.font:xft:Inconsolata:Medium:pixelsize=14
 
 ! Scroll
 

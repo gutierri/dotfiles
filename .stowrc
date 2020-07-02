@@ -1,0 +1,6 @@
+-v
+--ignore='\.stowrc'
+--ignore='\.gitmodules'
+--ignore='\.gitignore'
+--ignore='\.git'
+--ignore='apt'

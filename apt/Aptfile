@@ -12,5 +12,8 @@ package "rxvt-unicode"
 package "pass"
 package "redshift"
 package "direnv"
+package "rofi"
+package "fonts-inconsolata"
+package "xfonts-terminus"
 
 echo "💃 Packages done!"
