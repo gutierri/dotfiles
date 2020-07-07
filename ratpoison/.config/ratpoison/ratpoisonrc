@@ -16,7 +16,7 @@ set border 3
 set fwcolor #ef4291
 set bwcolor #9F9F9F
 
-set winname title
+set winname class
 
 set rudeness 12
 
@@ -36,7 +36,7 @@ bind C-r restart
 bind c exec urxvt
 bind C-c exec urxvt
 
-bind space exec rofi -modi "drun,run" -show drun
+bind space exec rofi -modi "drun,run,system-menu:$HOME/.local/share/rofi/rofi-power-menu/rofi-power-menu --no-symbols" -show drun
 
 bind slash swap
 
@@ -49,17 +49,17 @@ bind h focusleft
 bind j focusdown
 bind k focusup
 bind l focusright
-bind C-h exchangeleft
-bind C-j exchangedown
-bind C-k exchangeup
-bind C-l exchangeright
+bind H exchangeleft
+bind J exchangedown
+bind K exchangeup
+bind L exchangeright
 
 # tab cycles windows
 bind Tab focus
 bind ISO_Left_Tab focusprev
 
 # (wip) gnu screen binds
-bind K delete
+bind C-k delete
 bind C-K kill
 
 bind x exec light-locker-command -l
@@ -93,4 +93,4 @@ unmanage pinentry
 unmanage qconsole
 
 # Background
-exec xsetroot -solid "#EBEBEB"
+exec $HOME/.config/ratpoison/scripts/startup.sh

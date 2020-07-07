@@ -47,8 +47,8 @@
 *.color21:      base06
 
 ! Fonts
-URxvt.font:xft:Inconsolata:Medium:pixelsize=14
-xterm.font:xft:Inconsolata:Medium:pixelsize=14
+URxvt.font:xft:Inconsolata:Medium:pixelsize=16
+xterm.font:xft:Inconsolata:Medium:pixelsize=16
 
 ! Scroll
 
@@ -81,20 +81,21 @@ urxvt*internalBorder: 4 #change urxvt to xterm if necessary. Using the font term
 
 
 ! DZEN2
-dzen2.foreground: #4F4B42
-dzen2.background: #E9D99A
-dzen2.font:       -*-terminus-*-r-normal-*-*-*-*-*-*-*-*-*-*-*
+dzen2.foreground:   base05
+dzen2.background:   base00
+dzen2.font: Inconsolata:Regular:size=10
 
 ! Rofi
+rofi.font: Inconsolata 14
 rofi.color-enabled: true
-rofi.color-window: base05, #002b36, #000000
-rofi.color-normal: base05, #cacaca, base05, base05, #ffc100
+rofi.color-window: base00, base05, #000000
+rofi.color-normal: base00, base05, base00, base05, base00
 rofi.color-active: #fdf6e3, #268bd2, #eee8d5, #268bd2, #fdf6e3
 rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
 
 ! Qconsole
-.qconsole*background:           white
-.qconsole*foreground:           black
+.qconsole*background:           base05
+.qconsole*foreground:           base00
 .qconsole*internalBorder:       5
 .qconsole*utmpInhibit:          true
 .qconsole*rightScrollBar:       true

@@ -17,5 +17,8 @@ package "fonts-inconsolata"
 package "xfonts-terminus"
 package "ctags"
 package "build-essential"
+package "scrot"
+package "stalonetray"
+package "dzen2"
 
 echo "💃 Packages done!"

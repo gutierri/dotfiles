@@ -1,3 +1,9 @@
 [submodule "screen/.config/screen/scripts/workdir.sh"]
 	path = screen/.local/share/screen-workdir.sh
 	url = https://github.com/gutierri/screen-workdir.sh.git
+[submodule "rofi/.local/share/rofi/rofi-power-menu"]
+	path = rofi/.local/share/rofi/rofi-power-menu
+	url = https://github.com/jluttine/rofi-power-menu
+[submodule "bash/.local/share/z"]
+	path = bash/.local/share/z
+	url = https://github.com/rupa/z
