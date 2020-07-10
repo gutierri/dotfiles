@@ -7,7 +7,7 @@ background "#EBEBEB"
 kludges force_icons_size
 grow_gravity NE
 icon_gravity NE
-icon_size 12
+icon_size 10
 sticky true
 window_type dock
 window_layer bottom
