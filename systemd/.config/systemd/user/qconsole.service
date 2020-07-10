@@ -1,0 +1,9 @@
+[Unit]
+Description=qconsole
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/qconsole -h 240
+
+[Install]
+WantedBy=default.target
