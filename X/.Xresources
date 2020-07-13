@@ -94,8 +94,9 @@ rofi.color-active: #fdf6e3, #268bd2, #eee8d5, #268bd2, #fdf6e3
 rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
 
 ! Qconsole
-qconsole*background:           base05
-qconsole*foreground:           base00
+qconsole*foreground:           base05
+qconsole*background:           base00
+
 qconsole*internalBorder:       5
 qconsole*utmpInhibit:          true
 qconsole*rightScrollBar:       true
