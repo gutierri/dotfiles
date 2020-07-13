@@ -106,5 +106,3 @@ set ignorehints on
 
 exec xrdb $HOME/.Xresources
 exec xsetroot -solid "#EBEBEB"
-
-exec $HOME/.config/ratpoison/scripts/startup.sh &
