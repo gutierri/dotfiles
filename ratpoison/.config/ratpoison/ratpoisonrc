@@ -103,6 +103,7 @@ unmanage stalonetray
 # custom settings (patched ratpoison)
 set gap 0
 set ignorehints on
+set ignoreresizehints 1
 
 exec xrdb $HOME/.Xresources
 exec xsetroot -solid "#EBEBEB"
