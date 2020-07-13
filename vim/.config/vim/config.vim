@@ -77,6 +77,7 @@ let mapleader = ","
 nmap <Leader><space> :noh<cr> " clean search highlight
 nmap <Leader>b :AsyncRun -cwd=<root> -program=make @<cr> " running makeprg
 nmap <Leader>t :AsyncRun grep -irn 'TODO:'<cr> " get TODO comment on project
+nmap <Leader>r :AsyncRun python3.8 %<cr>
 noremap <Leader>q :call asyncrun#quickfix_toggle(8)<cr> " toggle quickfix
 
 " }}}
@@ -145,5 +146,10 @@ let g:asyncrun_open = 7 " height quickfix run asyncrun command
 
 " majutsushi/tagbar
 nmap <F8> :TagbarToggle<CR>
+
+" }}}
+" custom commands {{{
+
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 " }}}

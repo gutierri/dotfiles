@@ -87,9 +87,9 @@ definekey top XF86ScreenSaver exec light-locker-command -l
 definekey top XF86MonBrightnessUp exec xbacklight +20%
 definekey top XF86MonBrightnessDown exec xbacklight -20%
 
-definekey top XF86AudioPrev exec playerctl previous
-definekey top XF86AudioPlay exec playerctl play-pause
-definekey top XF86AudioNext exec playerctl next
+definekey top XF86AudioPrev exec mpris2controller Previous
+definekey top XF86AudioPlay exec mpris2controller PlayPause
+definekey top XF86AudioNext exec mpris2controller Next
 
 
 # Java Applications

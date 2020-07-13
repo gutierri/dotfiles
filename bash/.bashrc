@@ -16,6 +16,14 @@ export GIT_PS1_SHOWUPSTREAM="auto"
 export GIT_PS1_DESCRIBE_STYLE="branch"
 export PATH=$PATH:$HOME/.local/bin
 
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+HISTSIZE=100000
+HISTFILESIZE=10000000
+PROMPT_COMMAND="history -a; history -n" # append and reload the history after each command
+HISTIGNORE='ls:ll:cd:pwd:bg:fg:history'
+
 # sets and options bash
 set -o noclobber
 set -o notify
