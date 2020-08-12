@@ -7,3 +7,6 @@
 [submodule "bash/.local/share/z"]
 	path = bash/.local/share/z
 	url = https://github.com/rupa/z
+[submodule "X/.local/share/X/colors/typewriter"]
+	path = X/.local/share/X/colors/typewriter
+	url = https://github.com/logico/typewriter-xresources.git

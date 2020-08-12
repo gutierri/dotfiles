@@ -14,6 +14,7 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUPSTREAM="auto"
 export GIT_PS1_DESCRIBE_STYLE="branch"
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 export PATH=$PATH:$HOME/.local/bin
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -55,13 +56,16 @@ alias mv='mv -i -v'
 alias rm='rm -i -v'
 alias refresh='source ~/.bashrc'
 alias screen-killall='screen -ls | grep -ioP "^\t.+?\." | sed -s "s/\t//g;s/\.//g" | xargs kill'
-alias venv-py='python3.8 -m venv "$HOME/.cache/venvs/$(pwd | rev | cut -d / -f-1 | rev)" &&  echo "virtualenv created on ~> $HOME/.cache/venvs/$(pwd | rev | cut -d / -f-1 | rev)"'
+alias venv-py='python3 -m venv "$HOME/.cache/venvs/$(pwd | rev | cut -d / -f-1 | rev)" &&  echo "virtualenv created on ~> $HOME/.cache/venvs/$(pwd | rev | cut -d / -f-1 | rev)"'
 alias g='git'
+alias json-pretty='python3 -m json.tool | less'
 
-# plugins/utils/etc
-if [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
-fi
+# bash completions
+[ -f /etc/bash_completion ] && source /etc/bash_completion
+
+# from package git
+[ -f /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
+[ -f /usr/share/git/completion/git-prompt.sh ] && source /usr/share/git/completion/git-prompt.sh
 
 # from https://github.com/rupa/z
 [ -f $HOME/.local/share/z/z.sh ] && source $HOME/.local/share/z/z.sh
@@ -76,16 +80,26 @@ fi
 # from https://github.com/gutierri/screen-workdir.sh
 [ -f $HOME/.local/share/screen-workdir.sh/screen-workdir.sh ] && source ~/.local/share/screen-workdir.sh/screen-workdir.sh
 
+# DIRENV {{{
 show_virtual_env() {
     if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
         echo "(venv:$(basename $VIRTUAL_ENV)) "
     fi
 }
+# }}}
 
-PS1='$(show_virtual_env)\W$(__git_ps1 " \[\e[1;91m\]on\[\e[0m\] git:%s") % '
+PS1='$(show_virtual_env)$([ \j -gt 0 ] && echo "(jobs:\j) ")\W$(__git_ps1 " \[\e[1;91m\]on\[\e[0m\] git:%s")> '
 PS2='... '
 
-if echo $TERM | grep ^screen -q
+# GNU Screen {{{
+if echo $TERM | grep ^screen -q || [[ -n $STY ]]
 then
-    PS1='\[\033k\033\\\]'$PS1
+    # update title on gnu/screen
+    PROMPT_COMMAND='echo -ne "\033k\033\0134"'
 fi
+
+
+if [[ $TERM == xterm ]]; then
+    TERM=xterm-256color
+fi
+# }}}

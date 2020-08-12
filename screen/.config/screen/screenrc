@@ -1,7 +1,10 @@
 # Startuo Message
 startup_message off
 
-# Visual Bell
+# enable default utf-8
+encoding UTF-8
+
+# disable visual Bell
 vbell off
 
 # Change bind C-a -> C-j
@@ -10,27 +13,30 @@ escape ^Jj
 # Timeout
 maptimeout 5
 
-# 256 colors on rxvt
-term screen-256color
+# enable 256 colors
+term xterm-256color                                         # enable 256 colors
+
+# enable bold font
+attrcolor b ".I"                                            # allow bold colors - necessary for some reason
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'    # tell screen how to set colors. AB = background, AF=foreground
+defbce on                                                   # use current bg color for erased chars
 
 # Fix residual editors
 altscreen on
 
 # Name column windowlist
-windowlist string "%4n %h%=%f"
-
-# Logfile
-logfile ~/.config/screen/screen-%n-%H-%y%m%d.log
+# windowlist string "%4n %h%=%f"
 
 # Hardstatus & Caption
 hardstatus alwayslastline
-hardstatus string '%{= wK} %-Lw%{+ wK}(#)%n%f %t%{-}%+Lw %= Session: %S'
+hardstatus string '%{+b kW} %-w%{= kR}%n %t%?(%u)%?%{-}%+w %= session: %S'
+caption always "%?%F%{+b WR}%:%{= kW}%? %n"
 
-## First window start at 1
-bind c screen 1
-bind ^c screen 1
-bind 0 select 10
-screen 1
+# First window start at 1
+## bind c screen 1
+## bind ^c screen 1
+## bind 0 select 10
+## screen 1
 
 # Save layout after detached and attached
 layout save default
@@ -40,5 +46,13 @@ bind j focus down
 bind k focus up
 bind l focus right
 bind h focus left
+
+# binds for resize frame region
+bind = resize =
+bind + resize +1
+bind - resize -1
+bind _ resize max
+
+shelltitle "> |bash" # update title dynamically
 
 shell -$SHELL

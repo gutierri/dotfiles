@@ -15,6 +15,7 @@
 	git = !exec git
 	s = status
 	c = commit
+	cm = commit -m
 	ca = commit --amend
 	can = commit --amend --no-edit
 	b = branch
@@ -30,7 +31,11 @@
 	sh = stash
 	shl = stash list
 	sw = show
+	re = rebase
+    rei = rebase -i
 	uncommit = reset --soft HEAD~1
 	cleanout = !git clean -df && git checkout -- .
 	open-last = !vim -O $(git diff-tree --no-commit-id --name-only -r HEAD)
 
+    # super powers
+    clone-to-dir = !python3 ~/Code/pull.py

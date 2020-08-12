@@ -2,21 +2,15 @@ escape s-j
 
 set startupmessage on
 
-set msgwait 0
+set msgwait 2
 set bgcolor #EBEBEB
 set fgcolor #2F2F2F
-set font "terminus:size=9"
+set font "FreeMono:size=11"
 set inputwidth 0
 set framefmt [%f] %c (%wx%h)
 set onlyborder 0
 
-set barsticky 0
-set barpadding 4 2
-set bargravity nw
-set barinpadding 1
-set barborder 0
-set padding 0 16 0 0
-set winliststyle row
+set barborder 1
 
 set border 3
 set fwcolor #ef4291
@@ -78,15 +72,16 @@ bind M-j removedown
 bind M-k removeup
 bind M-l removeright
 
-# fn keys
 definekey top Print exec scrot $HOME/Pictures/Screenshots/$(date +%Y-%m-%d-%H--%M--%S).png
-definekey top XF86AudioRaiseVolume exec amixer -q set Master 6%+
-definekey top XF86AudioLowerVolume exec amixer -q set Master 6%-
-definekey top XF86AudioMute exec amixer -q set Master playback toggle
-definekey top XF86ScreenSaver exec light-locker-command -l
-definekey top XF86MonBrightnessUp exec xbacklight +20%
-definekey top XF86MonBrightnessDown exec xbacklight -20%
 
+# fn keys
+definekey top XF86AudioRaiseVolume exec amixer -q set Master 6%+ && ratpoison -c "echo volume: $(amixer sget Master | grep -i left | grep -ioP '\[([0-9].+%)\]' | tr -d '[|]')"
+definekey top XF86AudioLowerVolume exec amixer -q set Master 6%- && ratpoison -c "echo volume: $(amixer sget Master | grep -i left | grep -ioP '\[([0-9].+%)\]' | tr -d '[|]')"
+definekey top XF86AudioMute exec pactl set-sink-mute 0 toggle && ratpoison -c "echo volume: muted"
+definekey top XF86AudioMicMute exec pactl set-source-mute 1 toggle && ratpoison -c "echo mic: muted"
+definekey top XF86ScreenSaver exec light-locker-command -l
+definekey top XF86MonBrightnessUp exec xbacklight +20% && ratpoison -c "echo $(xbacklight -get | cut -c 1,2)%"
+definekey top XF86MonBrightnessDown exec xbacklight -20% && ratpoison -c "echo $(xbacklight -get | cut -c 1,2)%"
 definekey top XF86AudioPrev exec mpris2controller Previous
 definekey top XF86AudioPlay exec mpris2controller PlayPause
 definekey top XF86AudioNext exec mpris2controller Next
@@ -98,12 +93,8 @@ exec wmname LG3D
 # Unmanage windows
 unmanage pinentry
 unmanage qconsole
-unmanage stalonetray
 
-# custom settings (patched ratpoison)
-set gap 0
+# patched settings
 set ignorehints on
-set ignoreresizehints 1
 
-exec xrdb $HOME/.Xresources
 exec xsetroot -solid "#EBEBEB"

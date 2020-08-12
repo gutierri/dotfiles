@@ -1,6 +1,8 @@
+-t $HOME
 -v
 --ignore='\.stowrc'
 --ignore='\.gitmodules'
 --ignore='\.gitignore'
 --ignore='\.git'
---ignore='apt'
+--ignore='apt*'
+--ignore='Aptfile'

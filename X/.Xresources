@@ -1,53 +1,7 @@
-#define base00 #EBEBEB
-#define base01 #e3e3e3
-#define base02 #b9b9b9
-#define base03 #ababab
-#define base04 #525252
-#define base05 #2F2F2F
-#define base06 #252525
-#define base07 #101010
-#define base08 #7c7c7c
-#define base09 #999999
-#define base0A #a0a0a0
-#define base0B #8e8e8e
-#define base0C #868686
-#define base0D #686868
-#define base0E #747474
-#define base0F #5e5e5e
-
-*.foreground:   base05
-*.background:   base00
-*.cursorColor:  base05
-
-*.color0:       base00
-*.color1:       base08
-*.color2:       base0B
-*.color3:       base0A
-*.color4:       base0D
-*.color5:       base0E
-*.color6:       base0C
-*.color7:       base05
-
-*.color8:       base03
-*.color9:       base08
-*.color10:      base0B
-*.color11:      base0A
-*.color12:      base0D
-*.color13:      base0E
-*.color14:      base0C
-*.color15:      base07
-
-! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
-! use 'shell' template to set these if necessary
-*.color16:      base09
-*.color17:      base0F
-*.color18:      base01
-*.color19:      base02
-*.color20:      base04
-*.color21:      base06
+#include ".local/share/X/colors/typewriter/typewriter.Xresources"
 
 ! Fonts
-*.font:xft:Inconsolata:Medium:pixelsize=16
+*.font:xft:FreeMono:Bold:pixelsize=14
 
 ! Scroll
 *scrollBar: false
@@ -80,16 +34,11 @@ XTerm*cursorBlink: true
 XTerm*selectToClipboard: true
 xterm*metaSendsEscape: true
 
-! DZEN2
-dzen2.foreground:   base05
-dzen2.background:   base00
-dzen2.font: Inconsolata:Regular:size=10
-
 ! Rofi
 rofi.font: Inconsolata 14
 rofi.color-enabled: true
-rofi.color-window: base00, base05, #000000
-rofi.color-normal: base00, base05, base00, base05, base00
+rofi.color-window: #EBEBEB, #2F2F2F, #000000
+rofi.color-normal: #EBEBEB, #2F2F2F, #EBEBEB, #2F2F2F, #EBEBEB
 rofi.color-active: #fdf6e3, #268bd2, #eee8d5, #268bd2, #fdf6e3
 rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
 rofi.kb-row-up: Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab
@@ -99,11 +48,11 @@ rofi.kb-remove-to-eol: Control+Shift+e
 rofi.kb-mode-next: Shift+Right,Control+Tab,Control+l
 rofi.kb-mode-previous: Shift+Left,Control+Shift+Tab,Control+h
 rofi.kb-remove-char-back: BackSpace
+rofi.sidebar-mode: true
 
 ! Qconsole
 qconsole*foreground:           base05
 qconsole*background:           base00
-
 qconsole*internalBorder:       5
 qconsole*utmpInhibit:          true
 qconsole*rightScrollBar:       true
