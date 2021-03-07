@@ -1,1 +1,124 @@
-.config/ratpoison/ratpoisonrc
+escape s-j
+
+set startupmessage on
+
+set msgwait 3
+set framemsgwait 1
+set font "GoMono:Italic:size=11"
+set inputwidth 0
+set framefmt [%f] %c (%wx%h)
+set onlyborder 0
+
+set barborder 0
+
+set border 2
+
+set winname class
+
+set rudeness 12
+
+alias infobar exec ratpoison -c "echo w: $(ip addr show wlp3s0  | grep -oP "inet\s\K([0-9].+?)\s")    //    battery: $(acpi -i | head -n1 | grep -ioP ':\s\K(.+?%)' | tr '[:upper:]' '[:lower:]' | tr -d ',')   //   volume: $($HOME/.local/bin/pulseaudio-get-volume)   //   date: $(date +'%d.%m.%Y at %H:%M')"
+alias launcher exec rofi -modi "drun,gnu screen:$HOME/.local/share/rofi/rofi-scripts/gnuscreen_session.sh,system-menu:$HOME/.local/share/rofi/rofi-power-menu/rofi-power-menu --no-symbols" -show drun 
+
+# workspaces
+exec rpws init 4 -k
+
+bind s-1 exec rpws 1
+bind s-2 exec rpws 2
+bind s-3 exec rpws 3
+bind s-4 exec rpws 4
+
+# Shortcuts
+bind Escape abort
+
+bind C-r restart
+
+bind space launcher
+
+bind slash swap
+
+unbind s
+bind S split
+bind C-S split
+
+bind bar hsplit
+bind C-bar hsplit
+
+# vi moves
+bind h focusleft
+bind j focusdown
+bind k focusup
+bind l focusright
+
+bind H exchangeleft
+bind J exchangedown
+bind K exchangeup
+bind L exchangeright
+
+bind M-h removeleft
+bind M-j removedown
+bind M-k removeup
+bind M-l removeright
+
+# tab cycles frames visibles
+bind Tab focus
+bind ISO_Left_Tab focusprev
+
+unbind C-a
+unbind a
+bind d time
+
+# real gnu screen binds
+bind C-k delete
+bind C-K kill
+unbind C-x
+unbind x
+bind x exec loginctl lock-session $XDG_SESSION_ID
+bind X remove
+
+definekey top Print exec scrot $HOME/pictures/screenshots/$(date +%Y-%m-%d-%H--%M--%S).png
+
+# simple bar information system
+bind i infobar
+bind C-i infobar
+
+# fn keys
+definekey top XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +6% && ratpoison -c "echo volume: $($HOME/.local/bin/pulseaudio-get-volume)"
+definekey top XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -6% && ratpoison -c "echo volume: $($HOME/.local/bin/pulseaudio-get-volume)"
+definekey top XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && ratpoison -c "echo volume: muted"
+definekey top XF86AudioMicMute exec pactl set-source-mute 1 toggle && ratpoison -c "echo mic: muted"
+
+definekey top XF86ScreenSaver exec light-locker-command -l
+definekey top XF86MonBrightnessUp exec xbacklight +20% && ratpoison -c "echo $(xbacklight -get | grep -oP "[0-9].+?\." | tr -d '.')%"
+definekey top XF86MonBrightnessDown exec xbacklight -20% && ratpoison -c "echo $(xbacklight -get | grep -oP "[0-9].+?\." | tr -d '.')%"
+definekey top XF86AudioPrev exec $HOME/code/github.com/icasdri/mpris2controller/mpris2controller Previous
+definekey top XF86AudioPlay exec $HOME/code/github.com/icasdri/mpris2controller/mpris2controller PlayPause
+definekey top XF86AudioNext exec $HOME/code/github.com/icasdri/mpris2controller/mpris2controller Next
+
+# patched settings
+set ignorehints on
+
+# launcher translator prompt
+
+bind t exec $HOME/.local/bin/rat-translate.sh
+
+# universal tab {{{
+#
+# generic solution for moving between tabs with same shotcut key
+# key map:
+# 	bind (ctrl-t), a, >
+# 	bind (ctrl-t), a, <
+# support current: firefox, gnu screen
+
+newkmap universaltabs
+
+definekey universaltabs greater echo universal-tabs: prev
+definekey universaltabs less echo universal-tabs: prev
+
+bind a readkey universaltabs
+
+# }}}
+
+exec xrdb -merge $HOME/.Xresources
+exec $HOME/.local/bin/sync-colorscheme --ratpoison
+exec $HOME/.local/bin/sync-colorscheme --xsetroot
