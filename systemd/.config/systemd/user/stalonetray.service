@@ -1,9 +1,0 @@
-[Unit]
-Description=stalonetray
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/stalonetray -c %h/.config/stalonetray/stalonetrayrc
-
-[Install]
-WantedBy=default.target

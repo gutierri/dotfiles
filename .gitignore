@@ -11,3 +11,4 @@ irssi/.irssi/config
 git/.config/git/ignore
 gtk/.config/gtk-3.0/bookmarks
 vim/.config/vim/autoload/plug.vim
+systemd/.config/systemd/user/default.target.wants/
