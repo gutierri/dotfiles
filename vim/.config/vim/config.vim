@@ -1,8 +1,9 @@
 " Settings {{{
-syntax on
-filetype indent on
 
 set nocompatible                " no compatible with vi
+
+filetype plugin indent on
+
 set relativenumber              " enable relative number lines
 set nonumber                    " hide line numbers
 set showcmd                     " show command bottom
@@ -23,12 +24,12 @@ set autochdir                   " Current directory of file
 
 " Settings indentation style default
 set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set autoindent
 set copyindent
-set shiftround
-set expandtab
+set autoindent             " Indent according to previous line.
+set expandtab              " Use spaces instead of tabs.
+set softtabstop=4          " Tab key indents by 4 spaces.
+set shiftwidth=4           " >> indents by 4 spaces.
+set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
 set formatoptions-=o "dont continue comments when pushing /O
 set showbreak=↪\ 
@@ -43,11 +44,18 @@ set hlsearch
 set incsearch " enable highlight on typing for substitute % s///g >= patch 8.1.0271
 
 " Ignore files
-set wildignore=.svn,.hg,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pdf,*.bak,*.beam,*.pyc,node_modules,.tox
+set wildignore+=.svn,.hg,.git
+set wildignore+=*.o,*.a,*.class
+set wildignore+=*.mo,*.la,*.so
+set wildignore+=*.obj,*.swp,*.jpg
+set wildignore+=*.png,*.xpm,*.gif
+set wildignore+=*.pdf,*.bak,*.beam
+set wildignore+=*.pyc,node_modules,.tox,.venv,.env
 
 "}}}
 
 " Settings Backup and change folders {{{
+
 silent !mkdir -p ~/.cache/vim/{swap,backup,undo}
 
 set backup writebackup undofile
@@ -55,8 +63,6 @@ set undodir=~/.cache/vim/undo//
 set backupdir=~/.cache/vim/backup//
 set directory=~/.cache/vim/swap//
 
-let viminfopath="~/.cache/vim/viminfo"
-let &viminfo .= ',n' . escape(viminfopath, ',')
 " }}}
 
 " Maps {{{
@@ -72,14 +78,8 @@ imap <LEFT> <NOP>
 imap <RIGHT> <NOP>
 
 " Breakline on NORMAL mode
-nmap <F8> o<Esc>
-nmap <F9> O<Esc>
-
-" move in wrap long lines is more intuitive
-noremap <silent> k gk
-noremap <silent> j gj
-noremap <silent> 0 g0
-noremap <silent> $ g$
+nmap <F9> o<Esc>
+nmap <F8> O<Esc>
 
 " Drop F1
 nmap <F1> <nop>
@@ -90,9 +90,17 @@ nmap <Leader>b :AsyncRun -cwd=<root> -program=make @<cr> " running makeprg
 nmap <Leader>t :AsyncRun grep -irn 'TODO:'<cr> " get TODO comment on project
 noremap <Leader>q :call asyncrun#quickfix_toggle(8)<cr> " toggle quickfix
 noremap <Leader>o :AsyncRun! xdg-open %<cr>
+noremap <Leader>r :AsyncRun -raw python3 %<cr>
+noremap <Leader>s :update<cr>
+
+noremap <F10> :AsyncRun! -cwd=<root> ctags -R .<cr>
 
 " Easily switch to directory of current file
 map <Leader>cd :cd %:p:h<CR>
+
+" windows/split manager
+nmap <C-W><bar> :call feedkeys(":vsplit \<Tab>", 'tn')<CR>
+nmap <C-W>S :call feedkeys(":split \<Tab>", 'tn')<CR>
 
 " }}}
 
@@ -110,45 +118,40 @@ if empty(glob('~/.config/vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.config/vim/plugged')
+call plug#begin('~/.cache/vim/plugged')
 
-Plug 'gutierri/localset.vim'
-Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-unimpaired' " remove
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'maralla/completor.vim'
 Plug 'direnv/direnv.vim'
 Plug 'blueyed/vim-diminactive'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'majutsushi/tagbar'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'logico/typewriter-vim'
+Plug 'gutierri/localset.vim'
 
 call plug#end()
 
 " }}}
 
-" Colorscheme custom {{{
+" setups&IDE likes {{{
 
-set t_Co=256
-colorscheme typewriter
-
-" }}}
-
-" Filetypes {{{
-
-augroup settingsfiletypes
+" setup paths and ctags root project
+augroup setup_paths
     autocmd!
-    autocmd FileType python setlocal textwidth=79 colorcolumn=79
-    autocmd BufRead,BufNewFile *.{txt,md,rst} setlocal wrap textwidth=79 colorcolumn=79
-    autocmd BufRead,BufNewFile *.{txt,md,rst} noremap <Leader>b :AsyncRun! pandoc --output $(VIM_FILENOEXT).pdf %:p<CR>
+    " set root project dir on path
+    autocmd BufEnter,BufRead,BufNewFile * silent! execute 'set path+='. asyncrun#get_root('.%.') . '/**'
 
-    autocmd BufEnter,BufRead,BufNewFile * silent! execute 'set path+='. FindRootDirectory() . '/**'
+    " set ctags files path
+    autocmd BufEnter,BufRead,BufNewFile * silent! execute 'set tags+='. asyncrun#get_root('.%.') . '/tags'
+augroup end
 
-    autocmd BufRead,BufNewFile *.{py} nmap <Leader>r :AsyncRun -focus=0 -rows=8 -mode=terminal python3 %<cr>
+" tips&tricks from help AsyncRun
+augroup local-asyncrun
+    au!
+    au User AsyncRunStop copen | wincmd p
+augroup END
+
+augroup pythonsetups
+    autocmd!
+    autocmd BufRead,BufNewFile *.py setlocal textwidth=79 colorcolumn=79
 augroup END
 
 " }}}
@@ -156,20 +159,14 @@ augroup END
 " Plugins settings {{{
 
 " vim/diminactive
-let g:diminactive_use_syntax = 1 " use syntax disable on unactive window
-let g:diminactive_use_colorcolumn = 0 " disable use of colorcolumn in unactive windows
-
-" airblade/rooter
-let g:rooter_manual_only = 1 " disable auto root directory insert on set path vim
+let g:diminactive_use_syntax = 1        " use syntax disable on unactive window
+let g:diminactive_use_colorcolumn = 1   " disable use of colorcolumn in unactive windows
 
 " skywind3000/asyncrun.vim
-let g:asyncrun_open = 7 " height quickfix run asyncrun command
+let g:asyncrun_open = 7                 " height quickfix run asyncrun command
 
 " majutsushi/tagbar
 nmap <F8> :TagbarToggle<CR>
-
-" maralla/completor.vim
-let g:completor_python_binary = 'python3'
 
 " }}}
 
@@ -183,9 +180,9 @@ command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 set statusline=
 set statusline+=\ [%{winnr()}] " number current buffer on window
-set statusline+=\ %*
-set statusline+=\ %F " absolute path current file
+set statusline+=\ %<           " not hidden when without space on screen
+set statusline+=\ %F           " absolute path current file
 set statusline+=\ %=
-set statusline+=\ %l:%c/%p%% " line,column and percent cursor current
+set statusline+=\ %l:%c/%p%%   " line,column and percent cursor current
 
 " }}}
