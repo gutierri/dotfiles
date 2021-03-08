@@ -7,7 +7,6 @@ export LANG=en_US.UTF-8
 export VISUAL="${EDITOR}"
 export VIMINIT='let $MYVIMRC="$HOME/.config/vim/config.vim" | source $MYVIMRC'
 export SCREENRC="${HOME}/.config/screen/screenrc"
-export PROMPT_COMMAND='history -a'
 export PAGER=less
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
@@ -16,14 +15,12 @@ export GIT_PS1_SHOWUPSTREAM="auto"
 export GIT_PS1_DESCRIBE_STYLE="branch"
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 export PATH=$PATH:$HOME/.local/bin
-
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-HISTSIZE=100000
-HISTFILESIZE=10000000
-PROMPT_COMMAND="history -a; history -n" # append and reload the history after each command
-HISTIGNORE='ls:ll:cd:pwd:bg:fg:history'
+export WORKSPACE_DIR=$HOME/code
+export HISTCONTROL=ignoreboth
+export HISTSIZE=100000
+export HISTFILESIZE=10000000
+export PROMPT_COMMAND="history -a; history -n" # append and reload the history after each command
+export HISTIGNORE='ls:ll:cd:pwd:bg:fg:history'
 
 # sets and options bash
 set -o noclobber
@@ -66,9 +63,19 @@ alias json-pretty='python3 -m json.tool | less'
 # from package git
 [ -f /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
 [ -f /usr/share/git/completion/git-prompt.sh ] && source /usr/share/git/completion/git-prompt.sh
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
 # from https://github.com/rupa/z
 [ -f $HOME/.local/share/z/z.sh ] && source $HOME/.local/share/z/z.sh
+
+# from https://github.com/rupa/v
+[ -f $HOME/.local/share/v/v ] && export PATH=$PATH:$HOME/.local/share/v
 
 # from https://asdf-vm.com
 [ -f $HOME/.asdf/asdf.sh ] && . $HOME/.asdf/asdf.sh
@@ -78,28 +85,46 @@ alias json-pretty='python3 -m json.tool | less'
 [ -x "$(command -v direnv)" ] && eval "$(direnv hook bash)"
 
 # from https://github.com/gutierri/screen-workdir.sh
-[ -f $HOME/.local/share/screen-workdir.sh/screen-workdir.sh ] && source ~/.local/share/screen-workdir.sh/screen-workdir.sh
+[ -f $HOME/.local/share/screen/screen-workdir.sh/screen-workdir.sh ] && source ~/.local/share/screen/screen-workdir.sh/screen-workdir.sh
+
+# autocomplete for alias {{{
+
+# from https://repo.cykerway.com/complete-alias.html
+[ -f $HOME/.local/share/complete-alias/complete_alias ] && source $HOME/.local/share/complete-alias/complete_alias
+
+complete -F _complete_alias g
+complete -F _complete_alias e
+
+# }}}
 
 # DIRENV {{{
+
 show_virtual_env() {
     if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
         echo "(venv:$(basename $VIRTUAL_ENV)) "
     fi
 }
+export -f show_virtual_env
+
 # }}}
 
-PS1='$(show_virtual_env)$([ \j -gt 0 ] && echo "(jobs:\j) ")\W$(__git_ps1 " \[\e[1;91m\]on\[\e[0m\] git:%s")> '
-PS2='... '
 
-# GNU Screen {{{
+export PS1='$(show_virtual_env)$([ \j -gt 0 ] && echo "(jobs:\j) ")\W$(__git_ps1 " \[\e[1;91m\]on\[\e[0m\] git:%s")> '
+export PS2='... '
+
+# SCREEN {{{
+
 if echo $TERM | grep ^screen -q || [[ -n $STY ]]
 then
     # update title on gnu/screen
-    PROMPT_COMMAND='echo -ne "\033k\033\0134"'
+    SCREEN_PROMPT_COMMAND='echo -ne "\033k\033\0134"'
+    PROMPT_COMMAND="$SCREEN_PROMPT_COMMAND;$PROMPT_COMMAND"
+
+    if [[ -n $DIRENV_DIR ]]; then
+        direnv reload
+    fi
 fi
 
-
-if [[ $TERM == xterm ]]; then
-    TERM=xterm-256color
-fi
 # }}}
+
+stty -ixon # disable flow control (and enable c-s for search bind bash)

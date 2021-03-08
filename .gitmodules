@@ -10,3 +10,6 @@
 [submodule "X/.local/share/X/colors/typewriter"]
 	path = X/.local/share/X/colors/typewriter
 	url = https://github.com/logico/typewriter-xresources.git
+[submodule "bash/.local/share/complete-alias"]
+	path = bash/.local/share/complete-alias
+	url = git@github.com:cykerway/complete-alias.git
