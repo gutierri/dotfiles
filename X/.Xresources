@@ -1,46 +1,67 @@
-#include ".local/share/X/colors/typewriter/typewriter.Xresources"
+#include ".local/share/Xcolors/default.Xresources"
 
-! Fonts
-*.font:xft:FreeMono:Bold:pixelsize=14
+*.cursorColor:    cc
 
-! Scroll
-*scrollBar: false
+*.foreground:     fg
+*.background:     bg
 
-! do not scroll with output
-URxvt*scrollTtyOutput: false
+! Black
+*.color0:         black
+*.color8:         bblack
 
-! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
-URxvt*scrollWithBuffer: true
+! Red
+*.color1:         red
+*.color9:         bred
 
-! scroll back to the bottom on keypress
-URxvt*scrollTtyKeypress: true
+! Yellow
+*.color3:         yellow
+*.color11:        byellow
 
-! Clickable URLs
-URxvt.perl-ext-common: default,matcher,clipboard,url-select,keyboard-select
-URxvt.url-launcher: /usr/bin/xdg-open
-URxvt.url-select.underline: true
-URxvt.matcher.button: 1
+! Green
+*.color2:         green
+*.color10:        bgreen
 
-! Disable binds C-S
-URxvt.iso14755: false
-URxvt.iso14755_52: false
+! Blue
+*.color4:         blue
+*.color12:        bblue
 
-! Cursor
-URxvt.cursorBlink: 1
-urxvt*internalBorder: 4
+! Magenta
+*.color5:         magenta
+*.color13:        bmagenta
 
-! xterm
-XTerm*cursorBlink: true
-XTerm*selectToClipboard: true
+! Cyan
+*.color6:         cyan
+*.color14:        bcyan
+
+! White
+*.color7:         white
+*.color15:        bwhite
+
+! xterm {{{
+xterm*faceName: Go Mono
+xterm*faceSize: 11
+xterm*renderFont: true
+xterm*scrollBar: false
+xterm*rightScrollBar: true
 xterm*metaSendsEscape: true
+xterm*savelines: 9666
+xterm*locale: false
+xterm*utf8: true
+xterm*cursorBlink: true
+xterm*scrollTtyOutput: false
+xterm*scrollKey: true
+xterm*selectToClipboard: true
+xterm*termName: xterm-256color
+xterm*visualBell: off
+! }}}
 
-! Rofi
-rofi.font: Inconsolata 14
+! rofi {{{
 rofi.color-enabled: true
-rofi.color-window: #EBEBEB, #2F2F2F, #000000
-rofi.color-normal: #EBEBEB, #2F2F2F, #EBEBEB, #2F2F2F, #EBEBEB
-rofi.color-active: #fdf6e3, #268bd2, #eee8d5, #268bd2, #fdf6e3
-rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
+rofi.color-window: bg, cc, bg
+rofi.color-normal: bg, fg, bg, fg, bg
+rofi.color-active: yellow, green, magenta, blue, cyan
+rofi.color-urgent: yellow, green, magenta, blue, cyan
+rofi.sidebar-mode: true
 rofi.kb-row-up: Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab
 rofi.kb-row-down: Down,Control+j
 rofi.kb-accept-entry: Control+m,Return,KP_Enter
@@ -48,11 +69,12 @@ rofi.kb-remove-to-eol: Control+Shift+e
 rofi.kb-mode-next: Shift+Right,Control+Tab,Control+l
 rofi.kb-mode-previous: Shift+Left,Control+Shift+Tab,Control+h
 rofi.kb-remove-char-back: BackSpace
-rofi.sidebar-mode: true
+! }}}
 
-! Qconsole
-qconsole*foreground:           base05
-qconsole*background:           base00
-qconsole*internalBorder:       5
-qconsole*utmpInhibit:          true
-qconsole*rightScrollBar:       true
+! qconsole {{{
+qconsole*faceName: Go Mono:size=10:antialias=true
+qconsole*internalBorder: 5
+qconsole*utmpInhibit: true
+qconsole*rightScrollBar: true
+qconsole*metaSendsEscape: true
+! }}}

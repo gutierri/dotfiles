@@ -1,0 +1,20 @@
+#define  fg        #000000
+#define  bg        #FFFFFF
+#define  cc        #657b83
+
+#define  black     #000000
+#define  bblack    #555753
+#define  red       #ff6565
+#define  bred      #ff8d8d
+#define  green     #93d44f
+#define  bgreen    #c8e7a8
+#define  yellow    #eab93d
+#define  byellow   #ffc123
+#define  blue      #204a87
+#define  bblue     #3465a4
+#define  magenta   #ce5c00
+#define  bmagenta  #f57900
+#define  cyan      #89b6e2
+#define  bcyan     #46a4ff
+#define  white     #cccccc
+#define  bwhite    #ffffff
