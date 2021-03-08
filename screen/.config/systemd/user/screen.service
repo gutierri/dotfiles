@@ -1,0 +1,11 @@
+[Unit]
+Description=screen
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/screen -c %h/.config/screen/default.rc -DmS autoscreen
+ExecStop=/usr/bin/screen -S autoscreen -X quit
+
+[Install]
+WantedBy=default.target

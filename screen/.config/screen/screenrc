@@ -1,8 +1,24 @@
 # Startuo Message
 startup_message off
 
+# don't log new windows to utmp (who and such won't work, which is fine)
+deflogin off
+
+# automatically detach on terminal hangup (so that one can attach again and
+# continue working)
+autodetach on
+
+# ignore case on searches in copy-mode
+ignorecase on
+
+# assume UTF-8 encoding
+defutf8 on
+
+# disable flow control as it conflicts with Ctrl-S prefix
+defflow off
+
 # enable default utf-8
-encoding UTF-8
+encoding utf-8
 
 # disable visual Bell
 vbell off
@@ -14,29 +30,23 @@ escape ^Jj
 maptimeout 5
 
 # enable 256 colors
-term xterm-256color                                         # enable 256 colors
+term xterm-256color
 
 # enable bold font
-attrcolor b ".I"                                            # allow bold colors - necessary for some reason
-termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'    # tell screen how to set colors. AB = background, AF=foreground
-defbce on                                                   # use current bg color for erased chars
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on # use current bg color for erased chars
 
 # Fix residual editors
 altscreen on
 
 # Name column windowlist
-# windowlist string "%4n %h%=%f"
+windowlist string "%4n %h%=%f"
 
 # Hardstatus & Caption
+caption splitonly '%?%F%{= Yk}%:%{= kW}%?%n: %t'
 hardstatus alwayslastline
-hardstatus string '%{+b kW} %-w%{= kR}%n %t%?(%u)%?%{-}%+w %= session: %S'
-caption always "%?%F%{+b WR}%:%{= kW}%? %n"
-
-# First window start at 1
-## bind c screen 1
-## bind ^c screen 1
-## bind 0 select 10
-## screen 1
+hardstatus string '%{= wK}%-w%{= kW} %n %{-}%{= KW} %t %{-}%?%+w%? %= %{= kW} session %{-}%{= KW} %S '
 
 # Save layout after detached and attached
 layout save default
@@ -47,12 +57,21 @@ bind k focus up
 bind l focus right
 bind h focus left
 
-# binds for resize frame region
-bind = resize =
-bind + resize +1
-bind - resize -1
-bind _ resize max
+bind ^k eval "kill"
 
 shelltitle "> |bash" # update title dynamically
 
 shell -$SHELL
+
+defscrollback 10000 # scrollback buffer size
+
+# userful commands {{{
+# resize region interactive like ratpoison
+# TODO: change color caption on interactive resize
+bind r eval "command -c irsz"
+bind -c irsz h eval "resize -h -1" "command -c irsz"
+bind -c irsz j eval "resize -v -1" "command -c irsz"
+bind -c irsz k eval "resize -v +1" "command -c irsz"
+bind -c irsz l eval "resize -h +1" "command -c irsz"
+bind -c irsz = eval "resize =" "command -c irsz"
+# }}}

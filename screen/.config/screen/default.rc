@@ -1,0 +1,5 @@
+source ~/.config/screen/screenrc
+
+screen -t mutt mutt
+screen -t htop htop
+screen -t rss newsboat
