@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+num_sink=$(pactl list sinks short | grep -i running | grep -Po "^[0-9]")
+lines_current_sink="$(pactl list sinks | grep -in "sink #${num_sink}" | cut -d ':' -f1),$(pactl list sinks | wc -l)"
+
+pactl list sinks | sed -n -e "${lines_current_sink}p" | grep -i '[[:space:]]volume:' | head -n1 | grep -iPo [0-9]?[0-9]?[0-9]% | head -n1

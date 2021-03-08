@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+
+import os
+import re
+import sys
+import subprocess
+
+from urllib.parse import urlparse, urlsplit
+from pathlib import Path
+
+fixs_regexp = lambda repo_url: re.sub('.git$', '', repo_url)
+
+def git_location_parser(repo_location):
+
+    ssh = repo_location.split('@')
+
+    if repo_location.startswith('https://') or \
+       repo_location.startswith('http://') or \
+       repo_location.startswith('git://'):
+        http_path = urlparse(repo_location)
+        repo_path_location = ''.join([http_path.netloc,
+                                        re.sub('\.git$', '', http_path.path)])
+
+
+    elif '@' in repo_location and len(ssh) == 2:
+        repo_path_location = re.sub('.git$', '', ssh[-1].replace(':', '/'))
+
+    return repo_path_location
+
+def main(params):
+    if len(params) == 1:
+        git_params, repo = '', params[0]
+    else:
+        git_params, repo = ' '.join(params[:-1]), params[-1]
+
+    work_dir = Path(os.getenv('WORKSPACE_DIR', os.getenv('HOME')))
+    repositorie_location = str(work_dir.joinpath(git_location_parser(repo)).absolute())
+
+    try:
+        subprocess.run(
+            f'git clone {git_params} {repo} {repositorie_location}'.split(),
+            check=True
+        )
+    except subprocess.CalledProcessError as e:
+        pass
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

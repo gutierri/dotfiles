@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -e
+
+get_color(){
+	xrdb -query | grep -i "$1" | grep -Po "#.+"
+}
+
+ratpoison_colors(){
+	# ratpoison
+	# set bgcolor - background color all text
+	# set fgcolor - foreground color all text
+	# set fwcolor - border color for the focused window
+	# set bwcolor - border color for the unfocused window
+	echo -e "colorscheme change: ratpoison\n"
+	echo "set fgcolor $(get_color 'foreground')"
+	/usr/bin/ratpoison -c "set fgcolor $(get_color 'foreground')"
+
+	echo "set bgcolor $(get_color 'background')"
+	/usr/bin/ratpoison -c "set bgcolor $(get_color 'background')"
+
+	echo "set fwcolor $(get_color 'cursorColor')"
+	/usr/bin/ratpoison -c "set fwcolor $(get_color 'cursorColor')"
+
+	echo "set bwcolor $(get_color 'background')"
+	/usr/bin/ratpoison -c "set bwcolor $(get_color 'background')"
+
+	echo -e "\n...\n"
+}
+
+xsetroot_colors(){
+	echo -e "colorscheme change: xsetroot\n"
+	echo "xsetroot -solid '$(get_color 'background')'"
+	xsetroot -solid "$(get_color 'background')"
+	echo -e "\n...\n"
+}
+
+rofi_colors(){
+	echo -e "colorscheme change: rofi\n"
+	echo "rofi.color-window: #EBEBEB, #2F2F2F, #000000"
+	echo "rofi.color-normal: #EBEBEB, #2F2F2F, #EBEBEB, #2F2F2F, #EBEBEB"
+	echo "rofi.color-active: #fdf6e3, #268bd2, #eee8d5, #268bd2, #fdf6e3"
+	echo "rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3"
+	echo -e "\n...\n"
+}
+
+case ${1} in
+	--ratpoison) ratpoison_colors ;;
+	--xsetroot) xsetroot_colors ;;
+	--rofi) rofi_colors ;;
+esac
