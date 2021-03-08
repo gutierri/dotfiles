@@ -1,0 +1,14 @@
+[Unit]
+Description=Redshift adjusts the color temperature of your screen according to your surroundings
+Documentation=http://jonls.dk/redshift/
+After=graphical.target
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/redshift -c %h/.config/redshift.conf
+TimeoutStopSec=5
+Restart=always
+
+[Install]
+WantedBy=default.target
