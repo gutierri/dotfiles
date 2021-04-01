@@ -1,15 +1,12 @@
-[submodule "screen/.config/screen/scripts/workdir.sh"]
-	path = screen/.local/share/screen-workdir.sh
-	url = https://github.com/gutierri/screen-workdir.sh.git
-[submodule "rofi/.local/share/rofi/rofi-power-menu"]
-	path = rofi/.local/share/rofi/rofi-power-menu
-	url = https://github.com/jluttine/rofi-power-menu
 [submodule "bash/.local/share/z"]
 	path = bash/.local/share/z
-	url = https://github.com/rupa/z
-[submodule "X/.local/share/X/colors/typewriter"]
-	path = X/.local/share/X/colors/typewriter
-	url = https://github.com/logico/typewriter-xresources.git
+	url = git@github.com:rupa/z
 [submodule "bash/.local/share/complete-alias"]
 	path = bash/.local/share/complete-alias
 	url = git@github.com:cykerway/complete-alias.git
+[submodule "rofi/.local/share/rofi/rofi-power-menu"]
+	path = rofi/.local/share/rofi/rofi-power-menu
+	url = git@github.com:jluttine/rofi-power-menu.git
+[submodule "screen/.local/share/screen/screen-workdir.sh"]
+	path = screen/.local/share/screen/screen-workdir.sh
+	url = git@github.com:gutierri/screen-workdir.sh.git
