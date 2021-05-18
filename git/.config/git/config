@@ -19,9 +19,9 @@
 	cm = commit -m
 	ca = commit --amend
 	can = commit --amend --no-edit
-	b = branch
-	ba = branch --all
-	bal = branch -l --sort=-committerdate --format="%(HEAD)|%(refname:short)|%(committerdate:relative)"
+	b = branch --sort=-committerdate --format='%(HEAD) %(refname:short) ~ %(committerdate:relative)'
+	ba = branch --all --sort=-committerdate --format='%(HEAD) %(refname:short) ~ %(committerdate:relative)'
+	t = tag
 	co = checkout
 	cl = clone
 	d = diff
@@ -40,7 +40,8 @@
 	uncommit = reset --soft HEAD~1
 	cleanout = !git clean -df && git checkout -- .
 	open-last = !vim -O $(git diff-tree --no-commit-id --name-only -r HEAD)
+	ignore-add = "!f() { grep -iq \"$1\" .gitignore || echo \"$1\" >> .gitignore; }; f"
 [pull]
-    rebase = true
+	rebase = true
 [init]
-    defaultBranch = main
+	defaultBranch = main

@@ -119,6 +119,6 @@ bind a readkey universaltabs
 
 # }}}
 
-exec xrdb -merge $HOME/.Xresources
+exec xrdb -I$HOME ~/.Xresources
 exec $HOME/.local/bin/sync-colorscheme --ratpoison
 exec $HOME/.local/bin/sync-colorscheme --xsetroot

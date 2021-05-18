@@ -41,8 +41,17 @@ def main(params):
             f'git clone {git_params} {repo} {repositorie_location}'.split(),
             check=True
         )
+        subprocess.run(
+            [
+                'bash',
+                '-c',
+                f'. $HOME/.local/share/z/z.sh; _z --add {repositorie_location}',
+            ],
+            check=True
+        )
     except subprocess.CalledProcessError as e:
         pass
 
 if __name__ == "__main__":
+    # TODO: entry in dir after clone (cd)
     main(sys.argv[1:])
