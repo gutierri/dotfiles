@@ -57,12 +57,19 @@ alias venv-py='python3 -m venv "$HOME/.cache/venvs/$(pwd | rev | cut -d / -f-1 |
 alias g='git'
 alias json-pretty='python3 -m json.tool | less'
 
-# bash completions
-[ -f /etc/bash_completion ] && source /etc/bash_completion
-
-# from package git
+# git completions and prompt {{{
 [ -f /usr/share/git/completion/git-completion.bash ] && source /usr/share/git/completion/git-completion.bash
 [ -f /usr/share/git/completion/git-prompt.sh ] && source /usr/share/git/completion/git-prompt.sh
+
+# termux settings
+[ -f $PREFIX/etc/bash_completion.d/git-completion.bash ] && source $PREFIX/etc/bash_completion.d/git-completion.bash
+[ -f $PREFIX/etc/bash_completion.d/git-prompt.sh ] && source $PREFIX/etc/bash_completion.d/git-prompt.sh
+
+# }}}
+
+# bash completions {{{
+
+[ -f /etc/bash_completion ] && source /etc/bash_completion
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -70,6 +77,11 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# termux settings
+[ -r $PREFIX/share/bash-completion/bash_completion ] && . $PREFIX/share/bash-completion/bash_completion
+
+# }}}
 
 # from https://github.com/rupa/z
 [ -f $HOME/.local/share/z/z.sh ] && source $HOME/.local/share/z/z.sh
@@ -128,3 +140,10 @@ fi
 # }}}
 
 stty -ixon # disable flow control (and enable c-s for search bind bash)
+
+if echo $PREFIX | grep -q "com.termux"; then
+	if ! pgrep okc-ssh-agent > /dev/null; then
+		okc-ssh-agent > "$PREFIX/tmp/okc-ssh-agent.env"
+	fi
+	source "$PREFIX/tmp/okc-ssh-agent.env"
+fi
